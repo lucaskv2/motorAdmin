@@ -1,31 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./CSS/style.css">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <header>
-        <nav class="navigation-bar">
-            <div class="logo">
-                <a href="#">LOGO</a>
-            </div>
-            <ul class="navigation-list">
-                <li>Inicio</li>
-                <li>Sobre Nosotros</li>
-                <li>Turnos</li>
-                <li>Servicios</li>
-                <li>Reseña</li>
-                <li>Contacto</li>
-            </ul>
-            <div class="loging">
-                <button>Iniciar</button>
-            </div> 
-        </nav>
-    </header>
+  <?php
+  include("./UTILS/header.php");
+  ?>
+  
+    
     <section class="section hero-section">
         <article class="text">
             <h2>aaaaaaaaaaaaaa</h2>
@@ -62,5 +41,9 @@
             <p>Lorem ipsum dolor sit amet.</p>
         </article>
     </section>
+
+<?php
+include("./UTILS/footer.php")
+?>
 </body>
 </html>
