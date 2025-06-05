@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-  include("./UTILS/header.php")
+  include("../UTILS/header-pages.php");
 ?>
-<body>
+
     <section class="section service-section">
         <article class="service-section image">
             <img src="#" alt="about image">

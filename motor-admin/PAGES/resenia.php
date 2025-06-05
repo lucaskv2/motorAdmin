@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-  include("./UTILS/header.php")
-  ?>
-<body>
-    
+  include("../UTILS/header-pages.php");
+?>
+
+
+  
 </body>
 </html>

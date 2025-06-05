@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php
+  include("../UTILS/header-pages.php");
+?>
+
     <section class="section about-section">
         <article class="about-section image">
             <img src="#" alt="about image">

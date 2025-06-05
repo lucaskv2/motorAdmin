@@ -3,8 +3,6 @@
   <?php
   include("./UTILS/header.php");
   ?>
-  
-    
     <section class="section hero-section">
         <article class="text">
             <h2>aaaaaaaaaaaaaa</h2>
