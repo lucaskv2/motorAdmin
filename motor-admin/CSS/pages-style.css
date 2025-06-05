@@ -1,22 +1,18 @@
-.contact .contact-form{
-    background-color: var(--bg-body);
-}
-.contact form{
-    background-color:var(--bg-alt);
-    color: var(--primary-color);
-    width: 100%;
-    min-width: 400px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /*align-items: center;*/
-}
 
-.contact form input{
+.section-contact{
+    background-color:wheat;
+    max-width: 50vw;
+    min-width: 400px;
+}
+.section-contact form{
+display: flex;
+flex-direction: column;
+width: 90%;
+}
+form input{
     border: 2px solid black;
     padding: 10px 30px;
-    margin: auto 20px ;
+    margin: 20px ;
     border-radius: 15px;
     background: none;
 }

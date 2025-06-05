@@ -4,7 +4,7 @@
   include("../UTILS/header-pages.php");
 ?>
 <body>
-    <section class="section contact">
+    <section class="section section-contact">
         <form action="">
             <input type="text" placeholder="Nombre">
             <input type="email" placeholder="Email">
