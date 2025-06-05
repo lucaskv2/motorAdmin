@@ -1,3 +1,49 @@
+.contact .contact-form{
+    background-color: var(--bg-body);
+}
+.contact form{
+    background-color:var(--bg-alt);
+    color: var(--primary-color);
+    width: 100%;
+    min-width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+.contact form input{
+    border: 2px solid black;
+    padding: 10px 30px;
+    margin: auto 20px ;
+    border-radius: 15px;
+    background: none;
+}
+
+.contact form textarea{
+    min-height: 200px;
+    margin: auto 20px ;
+    border: 2px solid black;
+    background-color: transparent;
+    border-radius: 15px;
+    padding:20px 30px;
+}
+.contact form .button{
+    width: 100%;
+    margin:20px auto  ;
+    padding:20px 30px;
+    background-color: var(--primary-color);
+    color: var(--bg-alt);
+    border: solid 2px transparent;
+}
+form .button:hover{
+    background-color: var(--bg-alt);
+    border: solid 2px var(--primary-color);
+    color: var(--primary-color);
+}
+
+
 .map-container {
     width: 100%;
     position: relative;

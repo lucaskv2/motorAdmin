@@ -4,13 +4,13 @@
   include("../UTILS/header-pages.php");
 ?>
 <body>
-    <section class="section contact-form">
+    <section class="section contact">
         <form action="">
             <input type="text" placeholder="Nombre">
             <input type="email" placeholder="Email">
             <input type="tel" placeholder="Telefono">
-            <input type="">
-            <input type="submit" placeholder="Enviar">
+            <textarea  class="textarea" id="" placeholder="Mensaje"></textarea>
+            <input type="submit" placeholder="Enviar" class="button">
         </form>
     </section>
     <section class="map-container">
