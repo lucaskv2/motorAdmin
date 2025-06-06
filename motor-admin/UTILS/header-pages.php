@@ -35,6 +35,12 @@
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../PAGES/control-stock.php">Control de Stock</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
+          </li>
         </ul>
         <div class="d-flex">
           <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
