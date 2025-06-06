@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-  include("../UTILS/header-pages.php");
-?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <body>
+    <?php
+        include("../UTILS/header-pages.php");
+    ?>
     <section class="section container py-5">
         <h2 class="mb-4 text-center">Contáctanos</h2>
         <form class="row g-3">
