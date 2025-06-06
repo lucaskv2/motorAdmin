@@ -9,10 +9,10 @@
 </head>
 <body>
     <?php
-      include("../UTILS/header-pages.php");
+      include("./UTILS/header-pages.php");
     ?>
     
     <?php
-      include("../UTILS/footer.php");
+      include("./UTILS/footer.php");
     ?>
 </body>

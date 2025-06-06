@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -47,6 +50,36 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+
+        <?php
+        include("./connection.php");
+
+        if(isset($_POST["submit"])){
+          $email=mysqli_real_escape_string($connection,$_POST["email"]);
+          $password=mysqli_real_escape_string($connection,$_POST["password"]);
+
+          $result = mysqli_query($connection,"SELECT * FROM usuario WHERE email='$email' AND password='$password' ") or die("Select Error");
+                $row = mysqli_fetch_assoc($result);
+
+                if(is_array($row) && !empty($row)){
+                  $_SESSION['valid'] = $row['email'];
+                }else{
+                    echo "<div class='message'>
+                      <p>Wrong Username or Password</p>
+                       </div> <br>";
+                   echo "<a href='index.php'><button class='btn'>Go Back</button>";
+                  /** NECESARIO AGEGAR UN MODAL PARA DECIR QUE EL USUARIO 
+                   * O EL PASSORD NO ES CORRECTO
+                   */
+                }
+
+
+                if(isset($_SESSION['valid']))
+                {
+                  header("Location: .....");// ... PAGINA DEL USUARIO
+                }
+        }
+        ?>
           <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -54,11 +87,11 @@
           <form>
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+              <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="loginPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="loginPassword">
+              <input type="password" name="password" class="form-control" id="loginPassword">
             </div>
             <button type="submit" class="btn btn-primary">Ingresar</button>
           </form>
