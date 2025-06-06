@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto</title>
+    <link rel="stylesheet" href="estiloPresupuesto.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <div>
+    <p>
+        Esta es nuestra pagina para solicitar presupuestos en base a lo que solicites llenando el formulario <br>
+        si o si se debe seleccionar 
+    </p>
+  </div>
+
+<div id="scroll">
+  <div class="servicios-fila">
+    <div class="servicio"><i class="ri-oil-line"></i><p>Chequeo y cambio de aceite, cambio liquido refrigerantea, rellenar el sapito</p></div>
+    <div class="servicio"><i class="ri-tools-fill"></i><p>Cambio de ruedas, cambio de frenos</p></div>
+    <div class="servicio"><i class="ri-steering-fill"></i><p>Dirección y alineacion, ajuste de balanceo</p></div>
+    <div class="servicio"><i class="ri-car-fill"></i><p>Chequeos generales</p></div>
+  </div>
+</div>
+  
+<br><br><br><br>
+  <form action="procesar.php" method="POST">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required>
+
+  <label for="email">Correo electrónico:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="productos">Productos:</label>
+  <select id="productos" name="productos" required>
+    <option value="">-- Seleccioná una opción --</option>
+    <option value="aceite">Aceite</option>
+    <option value="liquidoRefrigerante">Liquido Refrigerante</option>
+    <option value="aromatizanteInterior">Aromatizante interior</option>
+    <option value="otro">Otro</option>
+  </select>
+
+  <label for="servicio">Servicio:</label>
+  <select id="pais" name="pais" required>
+    <option value="">-- Selecciona el servicio --</option>
+    <option value="arg">Cambio de aceite</option>
+    <option value="mex">Cambio de ruedas</option>
+    <option value="col">Cambio de frenos</option>
+    <option value="esp">Chequeo general</option>
+    <option value="otro">Otro</option>
+  </select>
+
+  <label for="mensaje">Mensaje:</label>
+  <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+  <button type="submit">Enviar</button>
+</form>
+  <script src="parallax.js"></script>
+</body>
+</html>
