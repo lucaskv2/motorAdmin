@@ -11,7 +11,6 @@
   ?>
   <section class="container my-5 d-grid gap-3">
     <h2 class="text-center mb-5">Reseñas y Testimonios</h2>
-
     <!-- Testimonio 1 -->
     <div class="row align-items-center shadow rounded p-4 mb-4">
       <div class="col-md-3 text-center">

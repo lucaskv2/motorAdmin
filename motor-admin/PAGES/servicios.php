@@ -10,7 +10,7 @@
         include("../UTILS/header-pages.php");
     ?>
     <section class="container text-center my-5">
-        <h2 class="display-5 fw-bold">Nuestros Servicios</h2>
+        <h2 class="text-center mb-5">Nuestros Servicios</h2>
     </section>
     <section class="container my-5">
         <div class="row g-4">

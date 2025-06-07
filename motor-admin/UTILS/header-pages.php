@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -35,6 +38,12 @@
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../PAGES/control-stock.php">Control de Stock</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
+          </li>
         </ul>
         <div class="d-flex">
           <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
@@ -51,14 +60,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="../php/logging.php" method="POST">
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+              <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="loginPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="loginPassword">
+              <input type="password" name="password" class="form-control" id="loginPassword">
             </div>
             <button type="submit" class="btn btn-primary">Ingresar</button>
           </form>
@@ -78,26 +87,26 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="../php/register.php" method="POST">
             <div class="mb-3">
               <label for="registerName" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="registerName">
+              <input type="text" name="nombre" class="form-control" id="registerName">
             </div>
             <div class="mb-3">
               <label for="registerLastname" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="registerLastname">
+              <input type="text" name="apellido" class="form-control" id="registerLastname">
             </div>
             <div class="mb-3">
               <label for="registerEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="registerEmail">
+              <input type="email" name="email" class="form-control" id="registerEmail">
             </div>
             <div class="mb-3">
               <label for="registerDNI" class="form-label">DNI</label>
-              <input type="text" class="form-control" id="registerDNI">
+              <input type="number" name="DNI"  class="form-control" id="registerDNI">
             </div>
             <div class="mb-3">
               <label for="registerPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="registerPassword">
+              <input type="password" name="contrasenia" class="form-control" id="registerPassword">
             </div>
             <button type="submit" class="btn btn-success">Registrarse</button>
           </form>
