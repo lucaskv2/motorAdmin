@@ -15,6 +15,18 @@ CREATE TABLE productos (
     total DECIMAL(10, 2) -- Columna para almacenar el total. Considera si lo necesitas.
 );
 
+-- BASE DE DATOS Y 
+CREATE DATABASE taller_mecanico;
+USE taller_mecanico;
+
+CREATE TABLE usuario (
+    `ID_USUARIO` INT(5) AUTO_INCREMENT PRIMARY KEY,
+    `NOMBRE` VARCHAR(40) NOT NULL,
+    `APELLIDO` VARCHAR(40) NOT NULL,
+    `EMAIL` VARCHAR(11) UNIQUE NOT NULL,
+    `DNI` VARCHAR(8) UNIQUE NOT NULL, 
+    `CONTRASENIA` VARCHAR(250) NOT NULL
+);
 -- 4. Insertar algunos datos de ejemplo (opcional, para probar)
 INSERT INTO productos (producto, descripcion, marca, cantidad, precio_unitario, total) VALUES
 ('Laptop', 'Portátil de alto rendimiento', 'MotorAdmin', 2, 1200.00, 2400.00),
