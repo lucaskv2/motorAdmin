@@ -6,40 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-<<<<<<< HEAD
-    <section class="section section-contact">
-        <form action="">
-            <input type="text" placeholder="Nombre">
-            <input type="email" placeholder="Email">
-            <input type="tel" placeholder="Telefono">
-            <textarea  class="textarea" id="" placeholder="Mensaje"></textarea>
-            <input type="submit" placeholder="Enviar" class="button">
-=======
     <?php
         include("../UTILS/header-pages.php");
     ?>
     <section class="section container py-5">
         <h2 class="mb-4 text-center">Contáctanos</h2>
-        <form class="row g-3">
+        <form class="row g-3" action="../php/procesar_formulario_de_contacto.php" method="POST">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Nombre" required>
+                <input name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
             </div>
             <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="Email" required>
+                <input name="Email" type="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="col-md-6">
-                <input type="tel" class="form-control" placeholder="Teléfono">
+                <input name="Telefono" type="tel" class="form-control" placeholder="Teléfono">
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Asunto">
+                <input name="Asunto" type="text" class="form-control" placeholder="Asunto">
             </div>
             <div class="col-12">
-                <textarea class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <textarea name="Mensaje" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
             </div>
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary px-5">Enviar</button>
             </div>
->>>>>>> main
         </form>
     </section>
 

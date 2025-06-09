@@ -27,6 +27,17 @@ CREATE TABLE usuario (
     `DNI` VARCHAR(8) UNIQUE NOT NULL, 
     `CONTRASENIA` VARCHAR(250) NOT NULL
 );
+-- TABLA PARA RECIBIR LOS MENSAJES DE L0S USUSARIOS
+CREATE TABLE mensajes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50),
+  email VARCHAR(100),
+  telefono VARCHAR(15),
+  asunto VARCHAR(150),
+  mensaje TEXT,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- 4. Insertar algunos datos de ejemplo (opcional, para probar)
 INSERT INTO productos (producto, descripcion, marca, cantidad, precio_unitario, total) VALUES
 ('Laptop', 'Portátil de alto rendimiento', 'MotorAdmin', 2, 1200.00, 2400.00),
