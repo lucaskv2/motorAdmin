@@ -44,6 +44,9 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../PAGES/almacen-resenia.php">Almacén de Reseñas</a>
+          </li>
         </ul>
         <div class="d-flex">
           <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>

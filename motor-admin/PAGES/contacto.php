@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../CSS/index.css">
 </head>
 <body>
     <?php
@@ -11,21 +12,21 @@
     ?>
     <section class="section container py-5">
         <h2 class="mb-4 text-center">Contáctanos</h2>
-        <form class="row g-3">
+        <form class="row g-3" action="../php/procesar_formulario_de_contacto.php" method="POST">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Nombre" required>
+                <input name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
             </div>
             <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="Email" required>
+                <input name="Email" type="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="col-md-6">
-                <input type="tel" class="form-control" placeholder="Teléfono">
+                <input name="Telefono" type="tel" class="form-control" placeholder="Teléfono">
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Asunto">
+                <input name="Asunto" type="text" class="form-control" placeholder="Asunto">
             </div>
             <div class="col-12">
-                <textarea class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <textarea name="Mensaje" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
             </div>
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary px-5">Enviar</button>
