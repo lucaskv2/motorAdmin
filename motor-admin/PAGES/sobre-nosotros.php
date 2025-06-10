@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="../CSS/index.css">
 <?php
   include("../UTILS/header-pages.php");
 ?>
 <body>
     <section class="container-fluid p-0 text-center">
-        <img src="../images/motorAdmin-nosotros.png" alt="Imagen principal" class="img-fluid mx-auto d-block w-40">
+        <img src="../images/motorAdmin-nosotros.png" alt="Imagen principal" id="img-principal" class="img-fluid mx-auto d-block w-40">
     </section>
 
     <section class="container text-center my-5">

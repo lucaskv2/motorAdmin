@@ -1,42 +1,79 @@
+
 <style>
-    .footer {
-      background-color: #ddd;
-      padding: 2rem 1rem;
-    }
+  .footer {
+    background-color:#1b263b;
+    color: #f8f9fa;
+    padding: 3rem 1rem;
+    font-size: 0.95rem;
+  }
 
-    .footer input {
-      background-color: white;
-      border: none;
-      padding: 0.5rem;
-      width: 100%;
-    }
+  .footer input {
+    background-color: #cbd5e1;
+    border: 1px solid #6c757d;
+    color: #3a506b;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+  }
 
-    .btn-contacto {
-      background-color: red;
-      color: white;
-      font-weight: bold;
-      width: 100%;
-      padding: 0.75rem;
-      border: none;
-    }
+  .footer input:hover {
+    color:rgb(17, 24, 32);
 
-    .footer .social-icons svg {
+  }
+
+  .btn-contacto {
+    background-color: #c62828; /* Bootstrap danger */
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-contacto:hover {
+    background-color:rgb(160, 37, 37);
+  }
+
+  .footer .social-icons svg {
       width: 32px;
       height: 32px;
       margin: 0 2rem;
+      color: #f8f9fa;
+      margin: 0 0.5rem;
+      transition: transform 0.3s, color 0.3s;
     }
 
-    @media (max-width: 768px) {
-      .footer .btn-contacto,
-      .footer input {
-        margin-bottom: 1rem;
-      }
+  .footer .social-icons a:hover {
+    color: #0d6efd;
+    transform: scale(1.2);
+  }
 
-      .footer .text-center {
-        margin-top: 1rem;
-      }
+  .footer .text-muted {
+    color:rgba(184, 193, 203, 0.92) !important;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer .btn-contacto,
+    .footer input {
+      margin-bottom: 1rem;
     }
+
+    .footer .text-center {
+      margin-top: 1rem;
+    }
+
+    .footer .social-icons {
+      margin-top: 1rem;
+    }
+  }
 </style>
+
+
 <footer class="footer mt-auto">
     <div class="container">
       <div class="row align-items-start text-center text-md-start">
