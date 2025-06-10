@@ -12,70 +12,45 @@
 <body>
     <?php
       include("../UTILS/header-pages.php");
-    ?>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Reseñas de Clientes</h2>
+      include("../connection.php");
+$sql = "SELECT * FROM mensajes ORDER BY fecha DESC";
+$result = mysqli_query($connection,$sql);
+    
+    echo'<div class="container my-5">
+        <h2 class="text-center mb-4">Contactos</h2>
         <div class="table-responsive">
             <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark">
                 <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Télefono</th>
+                <th scope="col">Asunto</th>
                 <th scope="col">Mensaje</th>
+                <th scope="col">Fecha</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-                <td>2025-06-09</td>
-                <td>Excelente atención y servicio, muy recomendado.</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Lucía Gómez</td>
-                <td>lucia.gomez@hotmail.com</td>
-                <td>2025-06-08</td>
-                <td>Rápidos y muy profesionales. Volveré sin duda.</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-                <td>2025-06-09</td>
-                <td>Excelente atención y servicio, muy recomendado.</td>
-                </tr>
-                <tr>
-                <th scope="row">4</th>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-                <td>2025-06-09</td>
-                <td>Excelente atención y servicio, muy recomendado.</td>
-                </tr>
-                <tr>
-                <th scope="row">5</th>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-                <td>2025-06-09</td>
-                <td>Excelente atención y servicio, muy recomendado.</td>
-                </tr>
-                <tr>
-                <th scope="row">6</th>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-                <td>2025-06-09</td>
-                <td>Excelente atención y servicio, muy recomendado.</td>
-                </tr>
-                
-            </tbody>
-            </table>
-        </div>
-    </div>
+            <tbody>';
 
-    <?php
-      include("../UTILS/footer.php");
-    ?>
-</body>
+    while($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>
+    
+    <td>".$row['nombre']."</td>
+    <td>".$row['email']."</td>
+    <td>".$row['telefono']."</td>
+    <td>".$row['asunto']."</td>
+    <td>".$row['mensaje']."</td>
+    <td>".$row['fecha']."</td>
+    </tr>";
+}
+echo " 
+</tbody>
+</table>";
+?>
+<?php 
+include("../UTILS/footer.php")
+?>
+
+
+
+

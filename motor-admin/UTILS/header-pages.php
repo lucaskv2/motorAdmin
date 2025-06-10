@@ -45,7 +45,7 @@ session_start();
             <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/almacen-resenia.php">Almacén de Reseñas</a>
+            <a class="nav-link" href="../PAGES/almacen-resenia.php">Almacén de Contactos</a>
           </li>
         </ul>
         <div class="d-flex">
