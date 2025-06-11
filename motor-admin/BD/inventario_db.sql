@@ -46,6 +46,65 @@ CREATE TABLE stock (
     precio_unitario DECIMAL(10, 2)
 );
 
+/*
+DELIMITER //
+
+CREATE PROCEDURE disminuir_stock(
+    IN p_id INT,
+    IN p_cantidad INT
+)
+BEGIN
+    DECLARE stock_actual INT;
+
+    -- Validar que la cantidad a disminuir sea positiva
+    IF p_cantidad <= 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cantidad a disminuir debe ser mayor que cero';
+    END IF;
+
+    -- Obtener el stock actual del producto
+    SELECT cantidad INTO stock_actual
+    FROM stock
+    WHERE id = p_id;
+
+    -- Validar que el producto exista
+    IF stock_actual IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Producto no encontrado';
+    END IF;
+
+    -- Validar que el stock no quede negativo
+    IF stock_actual < p_cantidad THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Stock insuficiente para disminuir la cantidad solicitada';
+    END IF;
+
+    -- Actualizar el stock restando la cantidad
+    UPDATE stock
+    SET cantidad = cantidad - p_cantidad
+    WHERE id = p_id;
+END;
+//
+
+DELIMITER ;
+
+
+Y SU  LLAMADA CON PHP
+// Parámetros para el procedimiento
+$id_producto = 3;
+$cantidad_a_disminuir = 5;
+
+// Preparar y ejecutar la llamada al procedimiento almacenado
+$sql = "CALL disminuir_stock(?, ?)";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("ii", $id_producto, $cantidad_a_disminuir);
+
+if ($stmt->execute()) {
+    echo "Stock disminuido correctamente.";
+} else {
+    echo "Error al disminuir stock: " . $stmt->error;
+}
+
+$stmt->close();
+$mysqli->close();
+*/
 
 -- 4. Insertar algunos datos de ejemplo (opcional, para probar)
 INSERT INTO productos (producto, descripcion, marca, cantidad, precio_unitario, total) VALUES

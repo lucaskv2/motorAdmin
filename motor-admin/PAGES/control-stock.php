@@ -20,12 +20,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"], $_POST["cantida
     $stmt->execute();
 }
 
+
+
 $sql = "SELECT * FROM stock ORDER BY id ASC";
 $result = mysqli_query($connection, $sql);
 ?>
 
 <div class="container my-5">
     <h2 class="text-center mb-4">Stock de Productos</h2>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Agregar nuevo producto
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="agregar" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="agregar">Agregar Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="../php/agregar_producto.php" method="POST">
+            <div class="col-md-6">
+                <input name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="col-md-6">
+                <input name="Marca" type="text" class="form-control" placeholder="Marca" required>
+            </div>
+            <div class="col-md-6">
+                <input name="Cantidad" type="number" class="form-control" placeholder="Cantidad">
+            </div>
+            <div class="col-md-6">
+                <input name="Precio" type="number" class="form-control" placeholder="Precio">
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary px-5">Enviar</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark">
@@ -67,5 +104,10 @@ $result = mysqli_query($connection, $sql);
 
 <?php include("../UTILS/footer.php"); ?>
 
+
+<script>
+    const btnAbrir=document.querySelector("btnAbrir");
+    btnAbrir.addEventListener("click",()=>{})
+</script>
 </body>
 </html>
