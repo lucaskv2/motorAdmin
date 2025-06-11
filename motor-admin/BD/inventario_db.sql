@@ -38,6 +38,15 @@ CREATE TABLE mensajes (
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE stock (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_producto VARCHAR(100) NOT NULL,
+    marca VARCHAR(50),
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10, 2)
+);
+
+
 -- 4. Insertar algunos datos de ejemplo (opcional, para probar)
 INSERT INTO productos (producto, descripcion, marca, cantidad, precio_unitario, total) VALUES
 ('Laptop', 'Portátil de alto rendimiento', 'MotorAdmin', 2, 1200.00, 2400.00),

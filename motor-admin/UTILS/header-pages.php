@@ -24,9 +24,6 @@ session_start();
             <a class="nav-link" href="../PAGES/inicio.php">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/sobre-nosotros.php">Sobre Nosotros</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../PAGES/turnos.php">Turnos</a>
           </li>
           <li class="nav-item">

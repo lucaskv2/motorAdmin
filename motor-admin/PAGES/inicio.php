@@ -21,6 +21,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 mb-3 mb-md-0">
+            <h3>Historia</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam non excepturi quis officiis voluptates...</p>
           </div>
           <div class="col-md-6 text-center">
@@ -37,6 +38,7 @@
             <img src="../images/quienes-somos.jpg" alt="fotoNosotros" class="img-fluid rounded w-100">
           </div>
           <div class="col-md-6">
+            <h3>¿Quiénes somos?</h3>
             <p>11Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus, 
               nemo adipisci! Voluptas nobis fugit vero dicta commodi nulla consequuntur! Corrupti doloremque iste voluptatem culpa, ad omnis! Eius earum laborum voluptatum.</p>
           </div>
@@ -49,6 +51,7 @@
       <div class="container">
         <div class="row align-items-center flex-column-reverse flex-md-row">
           <div class="col-md-6 mt-3 mt-md-0">
+            <h3>Misión y Visión</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur in minus at molestiae doloremque fuga, blanditiis consectetur, illo recusandae enim optio harum non doloribus ullam quas nihil quidem suscipit aliquid?</p>
             <a href="./turnos.php"><button class="btn btn-primary mt-2">Reserva tu turno</button></a>
           </div>
