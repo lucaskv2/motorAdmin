@@ -9,15 +9,32 @@
     <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/inicio.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+      .transition-span {
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+      }
+
+      .transition-span-motor:hover {
+        transform: scale(1.1);
+        color: #0d6efd !important; 
+      }
+
+      .transition-span-admin:hover {
+        transform: scale(1.1);
+        color:rgb(253, 13, 13) !important; 
+      }
+    </style>
 </head>
 <body>
     <?php
       include("../UTILS/header-pages.php");
     ?>
-    <h1 class="text-center fw-bold display-4 my-4">
-      <span style="color: #12344D;">Motor</span><span class="text-danger">Admin</span>
+    <h1 class="text-center fw-bold display-4 my-4 animate__animated animate__rubberBand animate__fast">
+      <span class="transition-span transition-span-motor" style="color: #12344D;">Motor</span>
+      <span class="transition-span transition-span-admin text-danger">Admin</span>
     </h1>
-    <section class="py-5 animate__animated animate__fadeInUp">
+    <section class="py-5 animate__animated animate__fadeInRightBig">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 mb-3 mb-md-0">
@@ -31,7 +48,7 @@
       </div>
     </section>
     
-    <section class="py-5 animate__animated animate__fadeInUp">
+    <section class="py-5 animate__animated animate__fadeInLeftBig">
       <div class="container">
         <div class="row align-items-center flex-column flex-md-row">
           <div class="col-md-6 mb-3 mb-md-0 text-center">
@@ -47,7 +64,7 @@
     </section>
 
 
-    <section class="py-5 animate__animated animate__fadeInUp">
+    <section class="py-5 animate__animated animate__fadeInRightBig">
       <div class="container">
         <div class="row align-items-center flex-column-reverse flex-md-row">
           <div class="col-md-6 mt-3 mt-md-0">

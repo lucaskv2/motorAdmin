@@ -74,7 +74,7 @@
 </style>
 
 
-<footer class="footer mt-auto">
+<footer class="footer mt-auto animate__animated animate__slideInUp">
     <div class="container">
       <div class="row align-items-start text-center text-md-start">
         <div class="col-md-4 mb-3 mb-md-0">

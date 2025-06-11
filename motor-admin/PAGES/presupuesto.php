@@ -6,6 +6,7 @@
     <title>Presupuesto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/presupuesto.css">
 </head>
@@ -15,7 +16,7 @@
     <section class="container text-center my-5 seccion-presupuestos">
         <h2 class="mb-5">Solicitar presupuesto</h2>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5 animate__animated animate__pulse">
         <div class="col">
             <div class="card h-100 text-center p-3">
             <i class="ri-oil-line fs-1 text-primary"></i>
@@ -42,7 +43,7 @@
         </div>
         </div>
 
-        <form action="procesar.php" method="POST" class="mx-auto container" style="max-width: 600px;">
+        <form action="procesar.php" method="POST" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
             <div class="mb-3 text-start">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -80,7 +81,6 @@
         include("../UTILS/footer.php");
     ?>
 
-    <script src="../js/parallax.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

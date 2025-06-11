@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/servicios.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <title>Document</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
     <section class="container my-5">
         <div class="row g-4">
             <!-- Tarjeta 1 -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 animate__animated animate__fadeInLeft">
             <div class="card h-100 text-center">
                 <img src="../images/cambio-de-aceite.jpg" class="card-img-top" alt="Servicio 1">
                 <div class="card-body">
@@ -27,7 +28,7 @@
             </div>
 
             <!-- Tarjeta 2 -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 animate__animated animate__fadeInRight">
             <div class="card h-100 text-center">
                 <img src="../images/cambio-ruedas.jpeg" class="card-img-top" alt="Servicio 2">
                 <div class="card-body">
@@ -38,7 +39,7 @@
             </div>
 
             <!-- Tarjeta 3 -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 animate__animated animate__fadeInLeft">
             <div class="card h-100 text-center">
                 <img src="../images/cambio-frenos.jpg" class="card-img-top" alt="Servicio 3">
                 <div class="card-body">
@@ -49,7 +50,7 @@
             </div>
 
             <!-- Tarjeta 4 -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 animate__animated animate__fadeInRight">
             <div class="card h-100 text-center">
                 <img src="../images/control-auto.jpg" class="card-img-top" alt="Servicio 4">
                 <div class="card-body">
