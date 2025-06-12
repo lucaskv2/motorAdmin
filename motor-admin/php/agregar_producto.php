@@ -6,7 +6,7 @@ include("../connection.php");
     $cantidad = $_POST["Cantidad"];
     $precio = $_POST["Precio"];
     
-    mysqli_query($connection,"INSERT INTO stock (nombre_producto, cantidad,marca,precio_unitario) VALUES ('$nombre','$marca','$cantidad','$precio')");
+    mysqli_query($connection,"INSERT INTO stock (nombre_producto, marca, cantidad, precio_unitario) VALUES ('$nombre', '$marca', '$cantidad', '$precio')");
 
     header("location:../PAGES/control-stock.php");
 
