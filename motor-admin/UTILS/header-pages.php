@@ -60,7 +60,7 @@ session_start();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../php/logging.php" method="POST">
+          <form id="loginForm" action="../php/logging.php" method="POST">
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
               <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
@@ -74,6 +74,24 @@ session_start();
           <div class="mt-3 text-center">
             ¿No tienes una cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Error -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="errorMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
@@ -115,4 +133,48 @@ session_start();
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      console.log('Form submitted');
+      
+      const formData = new FormData(this);
+      console.log('Form data:', Object.fromEntries(formData));
+      
+      fetch('../php/logging.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        console.log('Response received:', response);
+        return response.json();
+      })
+      .then(data => {
+        console.log('Data:', data);
+        if (data.success) {
+          window.location.reload();
+        } else {
+          // Cerrar el modal de login
+          const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+          loginModal.hide();
+          
+          // Mostrar el modal de error
+          document.getElementById('errorMessage').textContent = data.message;
+          const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+          errorModal.show();
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Cerrar el modal de login
+        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+        loginModal.hide();
+        
+        // Mostrar el error en el modal
+        document.getElementById('errorMessage').textContent = 'Error al procesar la solicitud';
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+      });
+    });
+  </script>
 </body>
