@@ -55,13 +55,13 @@
     <!-- Opciones del menú -->
     <ul class="list-group mb-3">
         <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/almacen-resenia.php" class="sidebar-link text-dark">📁 Almacén de Contactos</a>
+            <a href="../ADMINISTRADOR/tabla-usuarios.php" class="sidebar-link text-dark">📦 Tabla de Usuarios</a>
         </li>
         <li class="list-group-item border-0">
             <a href="../ADMINISTRADOR/control-stock.php" class="sidebar-link text-dark">📦 Control de Stock</a>
         </li>
         <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/tabla-usuarios.php" class="sidebar-link text-dark">📦 Tabla de Usuarios</a>
+            <a href="../ADMINISTRADOR/almacen-resenia.php" class="sidebar-link text-dark">📁 Almacén de Contactos</a>
         </li>
     </ul>
 

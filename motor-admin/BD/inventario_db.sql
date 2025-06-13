@@ -49,6 +49,16 @@ CREATE TABLE stock (
     precio_unitario DECIMAL(10, 2)
 );
 
+CREATE TABLE empleado (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NOT NULL,
+    direccion VARCHAR(40) NOT NULL,
+    especialidad VARCHAR(20) NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 /*
 DELIMITER //
 

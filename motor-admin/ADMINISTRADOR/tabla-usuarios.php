@@ -10,8 +10,11 @@
     <?php
         include("../UTILS/sidebar.php");
         include("../connection.php");
-        $sql = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
-        $result = mysqli_query($connection,$sql);
+        $sqlUsuario = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
+        $resultUsuario = mysqli_query($connection,$sqlUsuario);
+
+        $sqlEmpleado = "SELECT * FROM empleado ORDER BY fecha DESC";
+        $resultEmpleado = mysqli_query($connection,$sqlEmpleado);
     ?>
     
     
@@ -21,7 +24,6 @@
             <select class="form-select" id="tablaSelect">
                 <option value="usuarios">Usuarios</option>
                 <option value="empleados">Empleados</option>
-                <option value="administradores">Administradores</option>
             </select>
         </div>
         <div id="tabla-usuarios" class="table-responsive tabla-content">
@@ -35,12 +37,12 @@
                         <th>Patente</th>
                         <th>Modelo</th>
                         <th>Rol</th>
-                        <th>Acciones</th>
+                        <th>Fecha de Registro</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
                         <tr>
                             <td><?= $row['id'] ?></td>
                             <td><?= htmlspecialchars($row['nombre']) ?></td>
@@ -63,19 +65,79 @@
         </div>
 
         <div id="tabla-empleados" class="tabla-content d-none">
-            <h4>Tabla de Empleados</h4>
-            <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Puesto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>101</td><td>María</td><td>Mecánico</td></tr>
-                <tr><td>102</td><td>Carlos</td><td>Recepcionista</td></tr>
-            </tbody>
+            <h4 class="mb-3">Registrar nuevo empleado</h4>
+            <div class="container my-4">
+                <form method="POST" action="../php/register-empleado.php" class="row g-3">
+                    <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="col-md-6">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <div class="col-md-4">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" name="dni" required>
+                    </div>
+
+                    <div class="col-md-4">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+
+                    <div class="col-md-4">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+
+                    <div class="col-md-6">
+                    <label for="especialidad" class="form-label">Especialidad</label>
+                    <input type="text" class="form-control" id="especialidad" name="especialidad" required>
+                    </div>
+
+                    <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Registrar empleado</button>
+                    </div>
+                </form>
+            </div>
+            
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Especialidad</th>
+                        <th>Fecha de Registro</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($resultEmpleado)) : ?>
+                        <tr>
+                            <td><?= $row['id'] ?></td>
+                            <td><?= htmlspecialchars($row['nombre']) ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['dni']) ?></td>
+                            <td><?= htmlspecialchars($row['telefono']) ?></td>
+                            <td><?= htmlspecialchars($row['direccion']) ?></td>
+                            <td><?= htmlspecialchars($row['especialidad']) ?></td>
+                            <td><?= htmlspecialchars($row['fecha']) ?></td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>')">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
             </table>
         </div>
     </div>
@@ -89,5 +151,6 @@
         tablaActiva.classList.remove('d-none');
     });
     </script>
+    
 </body>
 </html>
