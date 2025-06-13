@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-include("../UTILS/header-pages.php");
+include("../UTILS/sidebar.php");
 include("../connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"], $_POST["cantidad"])) {
@@ -177,9 +177,6 @@ function deleteProduct() {
     });
 }
 </script>
-
-<?php include("../UTILS/footer.php"); ?>
-
 
 <script>
     const btnAbrir=document.querySelector("btnAbrir");

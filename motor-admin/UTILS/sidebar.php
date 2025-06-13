@@ -60,6 +60,9 @@
         <li class="list-group-item border-0">
             <a href="../ADMINISTRADOR/control-stock.php" class="sidebar-link text-dark">📦 Control de Stock</a>
         </li>
+        <li class="list-group-item border-0">
+            <a href="../ADMINISTRADOR/tabla-usuarios.php" class="sidebar-link text-dark">📦 Tabla de Usuarios</a>
+        </li>
     </ul>
 
 
