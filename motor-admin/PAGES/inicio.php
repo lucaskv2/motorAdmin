@@ -39,7 +39,10 @@
         <div class="row align-items-center">
           <div class="col-md-6 mb-3 mb-md-0">
             <h3>Historia</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam non excepturi quis officiis voluptates...</p>
+            <p>Con muchos años de trayectoria, nuestra historia se ha construido sobre la pasión por los vehículos y el 
+              compromiso con un servicio excepcional. Desde aquellos primeros talleres hasta la moderna infraestructura 
+              de hoy, hemos evolucionado junto a la industria automotriz, manteniendo siempre la calidad y la confianza 
+              como pila res fundamentales.</p>
           </div>
           <div class="col-md-6 text-center">
             <img src="../images/historia-taller.jpeg" alt="fotoAuto" class="img-fluid rounded">
@@ -56,8 +59,11 @@
           </div>
           <div class="col-md-6">
             <h3>¿Quiénes somos?</h3>
-            <p>11Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus, 
-              nemo adipisci! Voluptas nobis fugit vero dicta commodi nulla consequuntur! Corrupti doloremque iste voluptatem culpa, ad omnis! Eius earum laborum voluptatum.</p>
+            <p>En motorAdmin, somos especialistas en mecánica automotriz, respaldados por años de experiencia y 
+              una formación continua en las últimas tecnologías del sector. Nuestro equipo de técnicos 
+              certificados utiliza herramientas de diagnóstico de vanguardia para asegurar la máxima precisión 
+              y eficiencia en cada intervención, garantizando la seguridad y el óptimo rendimiento de tu 
+              vehículo</p>
           </div>
         </div>
       </div>
@@ -69,7 +75,9 @@
         <div class="row align-items-center flex-column-reverse flex-md-row">
           <div class="col-md-6 mt-3 mt-md-0">
             <h3>Misión y Visión</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur in minus at molestiae doloremque fuga, blanditiis consectetur, illo recusandae enim optio harum non doloribus ullam quas nihil quidem suscipit aliquid?</p>
+            <p>Proveer servicios de mantenimiento y reparación automotriz de la más alta calidad, 
+              garantizando la seguridad, el rendimiento y la durabilidad de cada vehículo, 
+              superando las expectativas de nuestros clientes a través de la excelencia y la confianza.</p>
             <a href="./turnos.php"><button class="btn btn-primary mt-2">Reserva tu turno</button></a>
           </div>
           <div class="col-md-6 text-center">
@@ -114,21 +122,24 @@
 
 
     <section id="contacto" class="py-5">
-      <div class="container">
+    <div class="container">
         <div class="row align-items-center flex-column flex-md-row">
-          <div class="col-md-6 contacto-img text-center mb-3 mb-md-0">
-            <img src="../images/mision-vision.jpg" alt="fotoMaps" class="img-fluid rounded w-100">
-          </div>
-          <div class="col-md-6 contacto-text">
-            <a href="https://www.google.com/maps" target="_blank">Google Maps</a>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur accusamus ducimus asperiores mollitia, veniam vel cumque suscipit praesentium, veritatis alias perspiciatis similique nihil nemo pariatur blanditiis et laboriosam commodi quasi!</p>
-            <a href="./contacto.php"><button class="btn btn-primary mt-2">Contactanos</button></a>
-          </div>
+            <div class="col-md-12"> <div class="row"> <div class="col-md-6 map-column"> <div class="map-responsive">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.4357497216654!2d-58.58309112461937!3d-34.74976786657929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc635b75f8549%3A0xc3f80c611484f23b!2sParis%20532%2C%20Haedo%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1718320666060!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-column"> 
+                        <a href="https://maps.app.goo.gl/TUqV2r73oP1H2k2z9" target="_blank">Google Maps</a>
+                        <p>Estamos ubicados en Paris 532, Haedo, Buenos Aires. Te invitamos a visitar 
+                            nuestras instalaciones y experimentar la calidad de nuestro servicio de primera mano. 
+                            ¡Te esperamos para brindarte la mejor atención y cuidado para tu vehículo!</p>
+                        <a href="./contacto.php"><button class="btn btn-primary mt-2">Contactanos</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
+    </div>
     </section>
-
     <?php
       include("../UTILS/footer.php");
     ?>
