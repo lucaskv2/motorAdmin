@@ -68,7 +68,7 @@
 
     <!-- Botón Logout -->
     <div class="mt-auto">
-      <a href="../logout.php" class="btn btn-outline-danger w-100">
+      <a href="../php/logout.php" class="btn btn-outline-danger w-100">
         <i class="bi bi-box-arrow-right"></i> Logout
       </a>
     </div>
