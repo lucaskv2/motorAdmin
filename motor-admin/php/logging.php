@@ -1,25 +1,49 @@
 <?php
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 include("../connection.php");
 
-try {
-    $email = mysqli_real_escape_string($connection, $_POST["email"]);
-    $contrasenia = mysqli_real_escape_string($connection, $_POST["password"]);
+$email = mysqli_real_escape_string($connection, $_POST["email"]);
+$contrasenia = mysqli_real_escape_string($connection, $_POST["password"]);
+$consulta=mysqli_query($connection, "SELECT *FROM usuario where NOMBRE='$email'");
 
-    $result = mysqli_query($connection, "SELECT * FROM usuario WHERE EMAIL='$email' AND CONTRASENIA='$contrasenia'") or die("Select Error");
-    $row = mysqli_fetch_assoc($result);
+$resultado=mysqli_num_rows($consulta);
 
-    if(is_array($row) && !empty($row)){
-        $_SESSION['valid'] = $row['email'];
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'El email o contraseña son incorrectos']);
-    }
 
-    if(isset($_SESSION['valid'])) {
+    if($resultado!=0){
+	$respuesta=mysqli_fetch_array($consulta);
+	$_SESSION['valid'] = $row['rol'];
+	$_SESSION['nombre']=$respuesta['nombre'];
+	$_SESSION['apellido']=$respuesta['apellido'];
+		
+		echo "Hola ".$_SESSION['nombre']." ".$_SESSION['apellido']."<br />";	
+        if(isset($_SESSION['valid'])) {
+        $rol=$_SESSION['valid'];
+        switch($rol= 'cliente'){
+            case'cliente':
+                header("Location: .....");
+                breaK;
+            case'empleado':
+                header("Location: .....");
+                breaK;
+            case'admin':
+                header("Location:../ADMINISTRADOR/almacen-resenia.php");
+                breaK;
+        }
         header("Location: .....");// ... PAGINA DEL USUARIO
     }
-} catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Error en el servidor: ' . $e->getMessage()]);
+
 }
+    
+   
+    /*if(is_array($row) && !empty($row)){
+        $_SESSION['valid'] = $row['rol'];
+        echo  $_SESSION['valid'];
+        //echo json_encode(['success' => true]);
+    } else {
+        //echo json_encode(['success' => false, 'message' => 'El email o contraseña son incorrectos']);
+    }
+
+    
+    
+*/
 ?>

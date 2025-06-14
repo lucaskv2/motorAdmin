@@ -63,7 +63,7 @@ session_start();
           <form id="loginForm" action="../php/logging.php" method="POST">
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+              <input type="text" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="loginPassword" class="form-label">Contraseña</label>
@@ -134,7 +134,7 @@ session_start();
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+   /* document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       console.log('Form submitted');
       
@@ -176,5 +176,5 @@ session_start();
         errorModal.show();
       });
     });
-  </script>
+  */</script>
 </body>
