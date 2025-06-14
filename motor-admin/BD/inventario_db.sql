@@ -19,6 +19,7 @@ CREATE TABLE productos (
 CREATE DATABASE taller_mecanico;
 USE taller_mecanico;
 
+<<<<<<< HEAD
 CREATE TABLE usuario (
     `ID_USUARIO` INT(5) AUTO_INCREMENT PRIMARY KEY,
     `NOMBRE` VARCHAR(40) NOT NULL,
@@ -32,6 +33,19 @@ CREATE TABLE usuario (
 SET rol = 'admin'
 WHERE id = 5;
 */
+=======
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    patente VARCHAR(20),
+    modelo VARCHAR(50),
+    contrasena VARCHAR(255) NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+>>>>>>> f8ed796a06b88b3d2261ddf74dfe5022298ae8dc
 -- TABLA PARA RECIBIR LOS MENSAJES DE L0S USUSARIOS
 CREATE TABLE mensajes (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,6 +65,16 @@ CREATE TABLE stock (
     precio_unitario DECIMAL(10, 2)
 );
 
+CREATE TABLE empleado (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NOT NULL,
+    direccion VARCHAR(40) NOT NULL,
+    especialidad VARCHAR(20) NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 /*
 DELIMITER //
 

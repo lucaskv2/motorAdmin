@@ -111,16 +111,20 @@ session_start();
               <input type="text" name="nombre" class="form-control" id="registerName">
             </div>
             <div class="mb-3">
-              <label for="registerLastname" class="form-label">Apellido</label>
-              <input type="text" name="apellido" class="form-control" id="registerLastname">
-            </div>
-            <div class="mb-3">
               <label for="registerEmail" class="form-label">Email</label>
               <input type="email" name="email" class="form-control" id="registerEmail">
             </div>
             <div class="mb-3">
               <label for="registerDNI" class="form-label">DNI</label>
-              <input type="number" name="DNI"  class="form-control" id="registerDNI">
+              <input type="number" name="dni"  class="form-control" id="registerDNI">
+            </div>
+            <div class="mb-3">
+              <label for="registerPatente" class="form-label">Patente</label>
+              <input type="text" name="patente" class="form-control" id="registerPatente">
+            </div>
+            <div class="mb-3">
+              <label for="registerModelo" class="form-label">Modelo</label>
+              <input type="text" name="modelo" class="form-control" id="registerModelo">
             </div>
             <div class="mb-3">
               <label for="registerPassword" class="form-label">Contraseña</label>
