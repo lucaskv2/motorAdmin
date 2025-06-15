@@ -19,21 +19,6 @@ CREATE TABLE productos (
 CREATE DATABASE taller_mecanico;
 USE taller_mecanico;
 
-<<<<<<< HEAD
-CREATE TABLE usuario (
-    `ID_USUARIO` INT(5) AUTO_INCREMENT PRIMARY KEY,
-    `NOMBRE` VARCHAR(40) NOT NULL,
-    `APELLIDO` VARCHAR(40) NOT NULL,
-    `EMAIL` VARCHAR(100) UNIQUE NOT NULL,
-    `DNI` VARCHAR(8) UNIQUE NOT NULL, 
-    `CONTRASENIA` VARCHAR(250) NOT NULL,
-    `rol` ENUM('admin', 'empleado', 'cliente')
-);
-/*UPDATE usuarios
-SET rol = 'admin'
-WHERE id = 5;
-*/
-=======
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -46,7 +31,6 @@ CREATE TABLE usuarios (
     rol VARCHAR(20) DEFAULT 'Cliente'
 );
 
->>>>>>> f8ed796a06b88b3d2261ddf74dfe5022298ae8dc
 -- TABLA PARA RECIBIR LOS MENSAJES DE L0S USUSARIOS
 CREATE TABLE mensajes (
   id INT AUTO_INCREMENT PRIMARY KEY,

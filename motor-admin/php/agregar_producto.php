@@ -8,6 +8,6 @@ include("../connection.php");
     
     mysqli_query($connection,"INSERT INTO stock (nombre_producto, marca, cantidad, precio_unitario) VALUES ('$nombre', '$marca', '$cantidad', '$precio')");
 
-    header("location:../PAGES/control-stock.php");
+    header("location:../ADMINISTRADOR/control-stock.php");
 
 ?>
