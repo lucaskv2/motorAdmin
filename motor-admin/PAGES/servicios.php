@@ -12,7 +12,7 @@
         include("../UTILS/header-pages.php");
     ?>
     <section class="container text-center my-5">
-        <h2 class="text-center mb-5">Nuestros Servicios</h2>
+        <h2 class="text-center mb-5 animate__animated animate__fadeInLeft">Nuestros Servicios</h2>
     </section>
     <section class="container my-5">
         <div class="row g-4">
@@ -32,7 +32,7 @@
             <div class="card h-100 text-center">
                 <img src="../images/cambio-ruedas.jpeg" class="card-img-top" alt="Servicio 2">
                 <div class="card-body">
-                    <h5 class="card-title">Cambio de Ruedas</h5>
+                    <h5 class="card-title ">Cambio de Ruedas</h5>
                     <p class="card-text">Reemplazo y balanceo de ruedas para garantizar una conducción estable y segura. Utilizamos herramientas de precisión para lograr el mejor agarre y desgaste uniforme.</p>
                 </div>
             </div>

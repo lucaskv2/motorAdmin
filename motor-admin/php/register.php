@@ -20,5 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
+<<<<<<< HEAD
+mysqli_query($connection,"INSERT INTO usuario(NOMBRE,APELLIDO,EMAIL,DNI,CONTRASENIA) VALUES('$nombre','$apellido','$email','$DNI','$contrasenia')");
+header("Location: ../index.php");
+=======
+>>>>>>> f8ed796a06b88b3d2261ddf74dfe5022298ae8dc
 
 ?>

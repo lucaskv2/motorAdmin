@@ -210,3 +210,27 @@ img {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   background-color: #f8f9fa;
 }
+
+.map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%; 
+    position: relative;
+    height: 0;
+    margin-bottom: 20px;
+    border-radius: 8px; 
+}
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border: 0; /
+}
+
+
+.text-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
