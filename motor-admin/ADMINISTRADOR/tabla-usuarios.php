@@ -19,6 +19,20 @@
     
     
     <div class="container my-5">
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                El empleado ha sido eliminado correctamente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Ha ocurrido un error al eliminar el empleado.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <div class="mb-3">
             <label for="tablaSelect" class="form-label fw-bold">Seleccionar tabla:</label>
             <select class="form-select" id="tablaSelect">
@@ -151,6 +165,55 @@
         tablaActiva.classList.remove('d-none');
     });
     </script>
-    
+
+    <!-- Modal de Confirmación de Eliminación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="deleteMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteEmpleado()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let currentDeleteId = null;
+    let currentDeleteName = null;
+
+    function confirmDelete(id, nombre) {
+        currentDeleteId = id;
+        currentDeleteName = nombre;
+        document.getElementById('deleteMessage').textContent = `¿Desea quitar a ${nombre} de esta lista?`;
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+
+    function deleteEmpleado() {
+        if (!currentDeleteId) return;
+
+        // Crear un formulario temporal para enviar la solicitud POST
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '../php/eliminar_empleado.php';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'id';
+        input.value = currentDeleteId;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
 </body>
 </html>
