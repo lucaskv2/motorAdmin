@@ -63,6 +63,9 @@
         <li class="list-group-item border-0">
             <a href="../ADMINISTRADOR/almacen-resenia.php" class="sidebar-link text-dark">📁 Almacén de Contactos</a>
         </li>
+        <li class="list-group-item border-0">
+            <a href="../ADMINISTRADOR/asignar-trabajos.php" class="sidebar-link text-dark">📁 Asignar Trabajos</a>
+        </li>
     </ul>
 
 
@@ -77,11 +80,5 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var sidebar = new bootstrap.Offcanvas(document.getElementById('adminSidebar'));
-    sidebar.show(); // abre automáticamente el offcanvas al cargar
-  });
-</script>
 </body>
 </html>

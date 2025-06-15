@@ -6,7 +6,7 @@ try {
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $contrasenia = mysqli_real_escape_string($connection, $_POST["password"]);
 
-    $result = mysqli_query($connection, "SELECT * FROM usuario WHERE EMAIL='$email' AND CONTRASENIA='$contrasenia'") or die("Select Error");
+    $result = mysqli_query($connection, "SELECT * FROM usuarios WHERE EMAIL='$email' AND CONTRASENIA='$contrasenia'") or die("Select Error");
     $row = mysqli_fetch_assoc($result);
 
     if(is_array($row) && !empty($row)){

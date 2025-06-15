@@ -33,16 +33,10 @@ session_start();
             <a class="nav-link" href="../PAGES/resenia.php">Reseña</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../PAGES/control-stock.php">Control de Stock</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/almacen-resenia.php">Almacén de Contactos</a>
+            <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
           </li>
         </ul>
         <div class="d-flex">

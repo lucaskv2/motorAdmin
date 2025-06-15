@@ -27,7 +27,8 @@ CREATE TABLE usuarios (
     patente VARCHAR(20),
     modelo VARCHAR(50),
     contrasena VARCHAR(255) NOT NULL,
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    rol VARCHAR(20) DEFAULT 'Cliente'
 );
 
 -- TABLA PARA RECIBIR LOS MENSAJES DE L0S USUSARIOS
@@ -58,6 +59,18 @@ CREATE TABLE empleado (
     direccion VARCHAR(40) NOT NULL,
     especialidad VARCHAR(20) NOT NULL,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE trabajos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario INT NOT NULL,
+    nombre_empleado INT NOT NULL,
+    descripcion TEXT NOT NULL,
+    estado ENUM('Pendiente', 'En progreso', 'Finalizado') DEFAULT 'Pendiente',
+    informe TEXT,
+    fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (nombre_usuario) REFERENCES usuarios(nombre),
+    FOREIGN KEY (nombre_empleado) REFERENCES empleado(nombre)
 );
 /*
 DELIMITER //
