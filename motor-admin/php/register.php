@@ -6,24 +6,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dni = $connection->real_escape_string($_POST['dni']);
     $patente = $connection->real_escape_string($_POST['patente']);
     $modelo = $connection->real_escape_string($_POST['modelo']);
-    $contrasenia = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT); 
+    $contrasena = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT); 
     
-    $sql = "INSERT INTO usuarios (nombre, email, dni, patente, modelo, contrasenia) 
-            VALUES ('$nombre', '$email', '$dni', '$patente', '$modelo', '$contrasenia')";
+    $sql = "INSERT INTO usuarios (nombre, email, dni, patente, modelo, contrasena) 
+            VALUES ('$nombre', '$email', '$dni', '$patente', '$modelo', '$contrasena')";
 
     if ($connection->query($sql) === TRUE) {
-        // Redireccionar
-        header("Location: ../PAGES/inicio.php?registro=exitoso");
-        exit();
+        echo json_encode([
+            'success' => true,
+            'message' => "Registro exitoso"
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => "Error al registrar el usuario"
+        ]);
     }
-
-    $conn->close();
+    exit();
 }
-
-<<<<<<< HEAD
-mysqli_query($connection,"INSERT INTO usuario(NOMBRE,APELLIDO,EMAIL,DNI,CONTRASENIA) VALUES('$nombre','$apellido','$email','$DNI','$contrasenia')");
-header("Location: ../index.php");
-=======
->>>>>>> f8ed796a06b88b3d2261ddf74dfe5022298ae8dc
 
 ?>
