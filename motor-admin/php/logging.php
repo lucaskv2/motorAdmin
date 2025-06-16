@@ -1,41 +1,91 @@
+ 
 <?php
-//header('Content-Type: application/json');
+session_start(); // Debe ser lo primero
+require_once("../connection.php");
+
+
+// Validación básica
+if (!isset($_POST["email"]) || !isset($_POST["password"])) {
+    die(json_encode(["error" => "Datos incompletos"]));
+}
+
+$email = mysqli_real_escape_string($connection, trim($_POST["email"]));
+$password = mysqli_real_escape_string($connection, $_POST["password"]);
+
+// Consulta preparada para mayor seguridad
+$stmt = mysqli_prepare($connection, "SELECT * FROM usuarios WHERE email = ?");
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if (!$result) {
+    die(json_encode(["error" => "Error en la consulta al servidor"]));
+}
+
+$user_data = mysqli_fetch_assoc($result);
+
+if ($user_data && password_verify($password, $user_data['contrasena'])) {
+    $_SESSION['valid'] = $user_data['rol'];
+    $_SESSION['nombre'] = $user_data['nombre'];
+    $_SESSION['apellido'] = $user_data['apellido'];
+
+    switch($user_data['rol']) {
+        case 'Cliente':
+            header("Location: ../PAGES/turnos.php");
+            break;
+        case 'Empleado':
+            header("Location: ../PAGES/resenia.php");
+            break;
+        case 'Admin':
+            header("Location: ../ADMINISTRADOR/almacen-resenia.php");
+            break;
+        default:
+            header("Location: ../PAGES/inicio.php");
+    }
+    exit;
+} else {
+    die(json_encode(["error" => "Usuario o contraseña incorrectos"]));
+}
+?>
+/*/header('Content-Type: application/json');
 include("../connection.php");
 
 $email = mysqli_real_escape_string($connection, $_POST["email"]);
+$consulta=mysqli_query($connection, "SELECT * FROM usuarios where email='$email'");
 $contrasenia = mysqli_real_escape_string($connection, $_POST["password"]);
-$consulta=mysqli_query($connection, "SELECT * FROM usuarios where NOMBRE='$email'");
-
 $resultado=mysqli_num_rows($consulta);
 
 
     if($resultado!=0){
-	$respuesta=mysqli_fetch_array($consulta);
-	$_SESSION['valid'] = $row['rol'];
+        $respuesta=mysqli_fetch_array($consulta);
+	if(password_verify($contrasenia,$respuesta['contrasena'])){
+        
+	$_SESSION['valid'] = $respuesta['rol'];
 	$_SESSION['nombre']=$respuesta['nombre'];
 	$_SESSION['apellido']=$respuesta['apellido'];
 		
-		echo "Hola ".$_SESSION['nombre']." ".$_SESSION['apellido']."<br />";	
+		print_r( "Hola ".$respuesta['rol']." ".$_SESSION['apellido']."<br />");	
         if(isset($_SESSION['valid'])) {
         $rol=$_SESSION['valid'];
-        switch($rol= 'cliente'){
-            case'cliente':
-                header("Location: .....");
+        switch($rol){
+            case'Cliente':
+                header("Location:../PAGES/turnos");
                 breaK;
-            case'empleado':
-                header("Location: .....");
+            case'Empleado':
+                header("Location:../PAGES/resenia.php");
                 breaK;
-            case'admin':
+            case'Admin':
                 header("Location:../ADMINISTRADOR/almacen-resenia.php");
                 breaK;
         }
-        header("Location: .....");// ... PAGINA DEL USUARIO
+        header("Location:../PAGES/inicio.php");// ... PAGINA DEL USUARIO
+    }
     }
 
 }
     
    
-    /*if(is_array($row) && !empty($row)){
+    if(is_array($row) && !empty($row)){
         $_SESSION['valid'] = $row['rol'];
         echo  $_SESSION['valid'];
         //echo json_encode(['success' => true]);

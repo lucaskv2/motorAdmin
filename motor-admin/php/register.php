@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $modelo = $connection->real_escape_string($_POST['modelo']);
     $contrasenia = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT); 
     
-    $sql = "INSERT INTO usuarios (nombre, email, dni, patente, modelo, contrasenia) 
+    $sql = "INSERT INTO usuarios (nombre, email, dni, patente, modelo, contrasena) 
             VALUES ('$nombre', '$email', '$dni', '$patente', '$modelo', '$contrasenia')";
 
     if ($connection->query($sql) === TRUE) {
@@ -20,10 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-<<<<<<< HEAD
-mysqli_query($connection,"INSERT INTO usuario(NOMBRE,APELLIDO,EMAIL,DNI,CONTRASENIA) VALUES('$nombre','$apellido','$email','$DNI','$contrasenia')");
 header("Location: ../index.php");
-=======
->>>>>>> f8ed796a06b88b3d2261ddf74dfe5022298ae8dc
 
 ?>
