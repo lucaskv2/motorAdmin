@@ -34,7 +34,9 @@ session_start();
           </li>
         </ul>
         <div class="d-flex">
-          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
+          <a href="../php/logout.php" class="btn btn-outline-danger w-100">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
         </div>
       </div>
     </nav>

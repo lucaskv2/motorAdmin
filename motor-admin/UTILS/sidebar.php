@@ -56,10 +56,9 @@ if (!isset($_SESSION)) {
   <div class="offcanvas-header d-flex flex-column align-items-start">
     <!-- Imagen de perfil -->
      <button type="button" class="btn-close align-self-end" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-    <img src="ruta/a/tu/imagen.png" alt="Admin" class="rounded-circle mb-2" style="width: 80px; height: 80px; object-fit: cover;">
+    <img src="../images/img_admin.png" alt="Admin" class="rounded-circle mb-2" style="width: 80px; height: 80px; object-fit: cover;">
     <h5 class="offcanvas-title fw-bold" id="adminSidebarLabel"><?php echo htmlspecialchars($nombre); ?></h5>
-    <span class="azul-panel mb-3">Admin</span>
-    
+    <span class="azul-panel mb-3">Admin</span>  
   </div>
 
   <div class="offcanvas-body d-flex flex-column justify-content-between">
@@ -91,8 +90,6 @@ if (!isset($_SESSION)) {
           </a>
       </li>
     </ul>
-
-
 
     <!-- Botón Logout -->
     <div class="mt-auto">

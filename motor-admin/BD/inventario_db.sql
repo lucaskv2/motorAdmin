@@ -1,21 +1,4 @@
-/*-- 1. Crear la base de datos
-CREATE DATABASE IF NOT EXISTS inventario_db;
-
--- 2. Seleccionar la base de datos
-USE inventario_db;
-
--- 3. Crear la tabla 'productos'
-CREATE TABLE productos (
-    id INT AUTO_INCREMENT PRIMARY KEY, -- Clave primaria autoincremental
-    producto VARCHAR(255) NOT NULL,
-    descripcion TEXT,
-    marca VARCHAR(100),
-    cantidad INT NOT NULL DEFAULT 0,
-    precio_unitario DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    total DECIMAL(10, 2) -- Columna para almacenar el total. Considera si lo necesitas.
-);*/
-
--- BASE DE DATOS Y 
+-- BASE DE DATOS  
 CREATE DATABASE taller_mecanico;
 USE taller_mecanico;
 
@@ -63,14 +46,14 @@ CREATE TABLE empleado (
 
 CREATE TABLE trabajos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_usuario INT NOT NULL,
-    nombre_empleado INT NOT NULL,
+    id_usuario INT NOT NULL,
+    id_empleado INT NOT NULL,
     descripcion TEXT NOT NULL,
     estado ENUM('Pendiente', 'En progreso', 'Finalizado') NOT NULL DEFAULT 'Pendiente',
     informe TEXT,
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (nombre_usuario) REFERENCES usuarios(id),
-    FOREIGN KEY (nombre_empleado) REFERENCES empleado(id)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_empleado) REFERENCES empleado(id)
 );
 
 CREATE TABLE consultas (
