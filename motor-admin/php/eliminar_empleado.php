@@ -12,7 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
     $result = $stmt->get_result();
     
     if ($result->num_rows === 0) {
-        header("Location: ../ADMINISTRADOR/tabla-usuarios.php?tabla=empleados&error=1");
+        echo json_encode([
+            'success' => false,
+            'message' => "Error: Empleado no encontrado"
+        ]);
         exit();
     }
     
@@ -22,9 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
     $stmt->bind_param("i", $id);
     
     if ($stmt->execute()) {
-        header("Location: ../ADMINISTRADOR/tabla-usuarios.php?tabla=empleados&success=1");
+        echo json_encode([
+            'success' => true,
+            'message' => "El empleado ha sido eliminado correctamente"
+        ]);
     } else {
-        header("Location: ../ADMINISTRADOR/tabla-usuarios.php?tabla=empleados&error=1");
+        echo json_encode([
+            'success' => false,
+            'message' => "Error al eliminar el empleado"
+        ]);
     }
     exit();
 }
