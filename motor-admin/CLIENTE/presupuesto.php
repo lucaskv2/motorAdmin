@@ -43,7 +43,7 @@
         </div>
         </div>
 
-        <form action="../php/procesar_consultas.php" method="POST" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
+        <form id="formPresupuesto" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
             <div class="mb-3 text-start">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -56,7 +56,7 @@
 
             <div class="mb-3 text-start">
                 <label for="servicio" class="form-label">Servicio:</label>
-                <select id="pais" name="pais" class="form-select" required>
+                <select id="servicio" name="servicio" class="form-select" required>
                 <option value="">-- Selecciona el servicio --</option>
                 <option value="Cambio de Aceite">Cambio de aceite</option>
                 <option value="Cambio de ruedas">Cambio de ruedas</option>
@@ -77,10 +77,57 @@
         </form>
     </section>
 
+    <!-- Modal de Éxito -->
+    <div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExitoLabel">Mensaje Enviado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Gracias por tu mensaje. Pronto nos pondremos en contacto.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
         include("../UTILS/footer.php");
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('formPresupuesto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('../php/procesar_consultas.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Mostrar modal de éxito
+                    const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
+                    modalExito.show();
+                    
+                    // Limpiar el formulario
+                    this.reset();
+                } else {
+                    alert('Error al enviar el mensaje: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al enviar el mensaje');
+            });
+        });
+    </script>
 </body>
 </html>
