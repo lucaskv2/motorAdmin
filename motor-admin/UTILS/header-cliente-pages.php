@@ -13,7 +13,7 @@ session_start();
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-      <a class="navbar-brand" href="../PAGES/inicio.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
+      <a class="navbar-brand" href="../CLIENTE/inicio.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,19 +24,13 @@ session_start();
             <a class="nav-link" href="../CLIENTE/inicio.php">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../CLIENTE/turnos.php">Turnos</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../CLIENTE/servicios.php">Servicios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../CLIENTE/resenia.php">Reseña</a>
+            <a class="nav-link" href="../CLIENTE/turnos.php">Turnos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../CLIENTE/presupuesto.php">Presupuesto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../CLIENTE/contacto.php">Contacto</a>
           </li>
         </ul>
         <div class="d-flex">

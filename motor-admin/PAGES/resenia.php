@@ -8,7 +8,7 @@
 </head>
 <body>
   <?php
-    include("../UTILS/header-pages.php");
+    include("../UTILS/header-cliente-pages.php");
   ?>
   <section class="container my-5 d-grid gap-3">
     <h2 class="text-center mb-5">Reseñas y Testimonios</h2>

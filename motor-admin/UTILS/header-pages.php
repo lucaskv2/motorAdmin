@@ -24,16 +24,7 @@ session_start();
             <a class="nav-link" href="../PAGES/inicio.php">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/turnos.php">Turnos</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="../PAGES/servicios.php">Servicios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../PAGES/resenia.php">Reseña</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../PAGES/presupuesto.php">Presupuesto</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
@@ -131,7 +122,7 @@ session_start();
     </div>
   </div>
 
-  <!-- Modal de Éxito -->
+
   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

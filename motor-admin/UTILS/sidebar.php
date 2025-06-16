@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Panel Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
   .azul-panel{
     color: #0d6efd;
@@ -54,22 +55,33 @@
   <div class="offcanvas-body d-flex flex-column justify-content-between">
     <!-- Opciones del menú -->
     <ul class="list-group mb-3">
-        <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/tabla-usuarios.php" class="sidebar-link text-dark">📦 Tabla de Usuarios</a>
-        </li>
-        <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/control-stock.php" class="sidebar-link text-dark">📦 Control de Stock</a>
-        </li>
-        <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/almacen-resenia.php" class="sidebar-link text-dark">📁 Almacén de Contactos</a>
-        </li>
-        <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/asignar-trabajos.php" class="sidebar-link text-dark">📁 Asignar Trabajos</a>
-        </li>
-        <li class="list-group-item border-0">
-            <a href="../ADMINISTRADOR/solicitud-presupuesto.php" class="sidebar-link text-dark">Solicitudes de Presupuesto</a>
-        </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/tabla-usuarios.php" class="sidebar-link text-dark">
+              <i class="bi bi-people-fill me-2"></i>Tabla de Usuarios y Empleados
+          </a>
+      </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/control-stock.php" class="sidebar-link text-dark">
+              <i class="bi bi-box-seam me-2"></i>Control de Stock
+          </a>
+      </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/almacen-resenia.php" class="sidebar-link text-dark">
+              <i class="bi bi-journal-text me-2"></i>Almacén de Contactos
+          </a>
+      </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/asignar-trabajos.php" class="sidebar-link text-dark">
+              <i class="bi bi-person-workspace me-2"></i>Asignar Trabajos
+          </a>
+      </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/solicitud-presupuesto.php" class="sidebar-link text-dark">
+              <i class="bi bi-receipt me-2"></i>Solicitudes de Presupuesto
+          </a>
+      </li>
     </ul>
+
 
 
     <!-- Botón Logout -->

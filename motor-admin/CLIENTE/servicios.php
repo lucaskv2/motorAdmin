@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-        include("../UTILS/header-pages.php");
+        include("../UTILS/header-cliente-pages.php");
     ?>
     <section class="container text-center my-5">
         <h2 class="text-center mb-5 animate__animated animate__fadeInLeft">Nuestros Servicios</h2>

@@ -66,7 +66,7 @@ CREATE TABLE trabajos (
     nombre_usuario INT NOT NULL,
     nombre_empleado INT NOT NULL,
     descripcion TEXT NOT NULL,
-    estado ENUM('Pendiente', 'En progreso', 'Finalizado') DEFAULT 'Pendiente',
+    estado ENUM('Pendiente', 'En progreso', 'Finalizado') NOT NULL DEFAULT 'Pendiente',
     informe TEXT,
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (nombre_usuario) REFERENCES usuarios(id),

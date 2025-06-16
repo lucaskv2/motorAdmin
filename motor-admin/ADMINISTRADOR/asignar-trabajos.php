@@ -115,7 +115,7 @@
                         <td><?= htmlspecialchars($row['nombre_empleado']) ?></td>
                         <td><?= htmlspecialchars($row['descripcion']) ?></td>
                         <td>
-                            <form method="POST">
+                            <form method="POST" action="../php/actualizar-estado.php">
                                 <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
                                 <select name="estado" class="form-select form-select-sm" onchange="this.form.submit()">
                                     <option value="Pendiente" <?= $row['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>

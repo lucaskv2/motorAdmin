@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-      include("../UTILS/header-pages.php");
+      include("../UTILS/header-cliente-pages.php");
     ?>
     <div class="main-content-wrapper">
         <main class="container my-5">

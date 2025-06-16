@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../CSS/presupuesto.css">
 </head>
 <body>
-    <?php include("../UTILS/header-pages.php"); ?>
+    <?php include("../UTILS/header-cliente-pages.php"); ?>
 
     <section class="container text-center my-5 seccion-presupuestos">
         <h2 class="mb-5">Solicitar presupuesto</h2>

@@ -31,13 +31,13 @@ if ($user_data && password_verify($password, $user_data['contrasenia'])) {
 
     switch($user_data['rol']) {
         case 'Cliente':
-            header("Location: ../CLIENTE/turnos.php");
+            header("Location: ../CLIENTE/inicio.php");
             break;
         case 'Empleado':
             header("Location: ../PAGES/resenia.php");
             break;
         case 'Admin':
-            header("Location: ../ADMINISTRADOR/almacen-resenia.php");
+            header("Location: ../ADMINISTRADOR/tabla-usuarios.php");
             break;
         default:
             header("Location: ../PAGES/inicio.php");
