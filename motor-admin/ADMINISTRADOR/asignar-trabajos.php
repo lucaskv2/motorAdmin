@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handsontable - Hoja de Cálculo Web</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
 </head>
 <body>
@@ -92,7 +93,7 @@
             <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
         </form>
 
-        <table class="table table-bordered table-hover">
+        <table id="tabla-asignar-trabajo" class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
                     <th>Cliente</th>
@@ -214,6 +215,19 @@
             }
         }
     });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tabla-asignar-trabajo').DataTable({
+            order: [[1, 'asc']],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
+            });
+        });
     </script>
 </body>
 </html>

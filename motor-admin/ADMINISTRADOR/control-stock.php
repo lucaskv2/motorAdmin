@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handsontable - Hoja de Cálculo Web</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+    <title>Control de Stock</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
 <body>
     <?php
@@ -102,7 +102,7 @@ $result = mysqli_query($connection, $sql);
 </div>
 
     <div class="table-responsive">
-        <table class="table table-bordered table-hover align-middle">
+        <table id="tabla-stock" class="table table-bordered table-hover align-middle">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -181,6 +181,20 @@ function deleteProduct() {
 <script>
     const btnAbrir=document.querySelector("btnAbrir");
     btnAbrir.addEventListener("click",()=>{})
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tabla-stock').DataTable({
+        order: [[1, 'asc']],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+        }
+        });
+    });
 </script>
 </body>
 </html>
