@@ -72,6 +72,17 @@ CREATE TABLE trabajos (
     FOREIGN KEY (nombre_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (nombre_empleado) REFERENCES empleado(id)
 );
+
+CREATE TABLE consultas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    servicio VARCHAR(100) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 /*
 DELIMITER //
 

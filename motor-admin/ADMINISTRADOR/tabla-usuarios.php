@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handsontable - Hoja de Cálculo Web</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
 <body>
     <?php
         include("../UTILS/sidebar.php");
         include("../connection.php");
-        $sqlUsuario = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
-        $resultUsuario = mysqli_query($connection,$sqlUsuario);
-
         $sqlEmpleado = "SELECT * FROM empleado ORDER BY fecha DESC";
         $resultEmpleado = mysqli_query($connection,$sqlEmpleado);
+
+        $sqlUsuario = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
+        $resultUsuario = mysqli_query($connection,$sqlUsuario);
     ?>
     
     
@@ -39,43 +40,6 @@
                 <option value="usuarios">Usuarios</option>
                 <option value="empleados">Empleados</option>
             </select>
-        </div>
-        <div id="tabla-usuarios" class="table-responsive tabla-content">
-            <table class="table table-bordered table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>DNI</th>
-                        <th>Patente</th>
-                        <th>Modelo</th>
-                        <th>Rol</th>
-                        <th>Fecha de Registro</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
-                        <tr>
-                            <td><?= $row['id'] ?></td>
-                            <td><?= htmlspecialchars($row['nombre']) ?></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
-                            <td><?= htmlspecialchars($row['dni']) ?></td>
-                            <td><?= htmlspecialchars($row['patente']) ?></td>
-                            <td><?= htmlspecialchars($row['modelo']) ?></td>
-                            <td><?= htmlspecialchars($row['rol']) ?></td>
-                            <td><?= htmlspecialchars($row['fecha_registro']) ?></td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>', 'user')">
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
         </div>
 
         <div id="tabla-empleados" class="tabla-content d-none">
@@ -118,7 +82,7 @@
                 </form>
             </div>
             
-            <table class="table table-bordered table-hover align-middle">
+            <table class="table table-bordered table-hover align-middle" id="tabla-empleado">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
@@ -154,20 +118,45 @@
                 </tbody>
             </table>
         </div>
+        <div id="tabla-usuarios" class="table-responsive tabla-content">
+            <table id="tabla-usuario" class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th>Patente</th>
+                        <th>Modelo</th>
+                        <th>Rol</th>
+                        <th>Fecha de Registro</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
+                        <tr>
+                            <td><?= $row['id'] ?></td>
+                            <td><?= htmlspecialchars($row['nombre']) ?></td>
+                            <td><?= htmlspecialchars($row['email']) ?></td>
+                            <td><?= htmlspecialchars($row['dni']) ?></td>
+                            <td><?= htmlspecialchars($row['patente']) ?></td>
+                            <td><?= htmlspecialchars($row['modelo']) ?></td>
+                            <td><?= htmlspecialchars($row['rol']) ?></td>
+                            <td><?= htmlspecialchars($row['fecha_registro']) ?></td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>', 'user')">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <script>
-    const tablaSelect = document.getElementById('tablaSelect');
-    const tablas = document.querySelectorAll('.tabla-content');
-
-    tablaSelect.addEventListener('change', () => {
-        tablas.forEach(tabla => tabla.classList.add('d-none'));
-        const tablaActiva = document.getElementById(`tabla-${tablaSelect.value}`);
-        tablaActiva.classList.remove('d-none');
-    });
-    </script>
-
-    <!-- Modal de Confirmación de Eliminación -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -202,6 +191,38 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+    const tablaSelect = document.getElementById('tablaSelect');
+    const tablas = document.querySelectorAll('.tabla-content');
+
+    tablaSelect.addEventListener('change', () => {
+        tablas.forEach(tabla => tabla.classList.add('d-none'));
+        const tablaActiva = document.getElementById(`tabla-${tablaSelect.value}`);
+        tablaActiva.classList.remove('d-none');
+    });
+        $(document).ready(function () {
+            $('#tabla-usuario').DataTable({
+            order: [[1, 'asc']], 
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#tabla-empleado').DataTable({
+            order: [[1, 'asc']], 
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
+            });
+        });
+    </script>
+
+    
 
     <script>
     let currentDeleteId = null;
