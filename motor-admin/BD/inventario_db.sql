@@ -26,7 +26,7 @@ CREATE TABLE usuarios (
     dni VARCHAR(20) NOT NULL UNIQUE,
     patente VARCHAR(20),
     modelo VARCHAR(50),
-    contrasena VARCHAR(255) NOT NULL,
+    contrasenia VARCHAR(255) NOT NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     rol VARCHAR(20) DEFAULT 'Cliente'
 );

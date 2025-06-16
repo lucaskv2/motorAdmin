@@ -24,14 +24,14 @@ if (!$result) {
 
 $user_data = mysqli_fetch_assoc($result);
 
-if ($user_data && password_verify($password, $user_data['contrasena'])) {
+if ($user_data && password_verify($password, $user_data['contrasenia'])) {
     $_SESSION['valid'] = $user_data['rol'];
     $_SESSION['nombre'] = $user_data['nombre'];
     $_SESSION['apellido'] = $user_data['apellido'];
 
     switch($user_data['rol']) {
         case 'Cliente':
-            header("Location: ../PAGES/turnos.php");
+            header("Location: ../CLIENTE/turnos.php");
             break;
         case 'Empleado':
             header("Location: ../PAGES/resenia.php");
