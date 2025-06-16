@@ -1,3 +1,12 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+}
+        if ($_SESSION['rol']!=='Admin')
+        {
+          header("Location:../PAGES/inicio.php");
+        } 
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
