@@ -11,16 +11,25 @@
 include("../UTILS/sidebar.php");
 include("../connection.php");
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"], $_POST["cantidad"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
     $id = $_POST["id"];
-    $cantidad = $_POST["cantidad"];
-    $sql_update = "UPDATE stock SET cantidad = ? WHERE id = ?";
-    $stmt = $connection->prepare($sql_update);
-    $stmt->bind_param("ii", $cantidad, $id);
-    $stmt->execute();
+    
+    if (isset($_POST["cantidad"])) {
+        $cantidad = $_POST["cantidad"];
+        $sql_update = "UPDATE stock SET cantidad = ? WHERE id = ?";
+        $stmt = $connection->prepare($sql_update);
+        $stmt->bind_param("ii", $cantidad, $id);
+        $stmt->execute();
+    }
+    
+    if (isset($_POST["precio"])) {
+        $precio = $_POST["precio"];
+        $sql_update = "UPDATE stock SET precio_unitario = ? WHERE id = ?";
+        $stmt = $connection->prepare($sql_update);
+        $stmt->bind_param("di", $precio, $id);
+        $stmt->execute();
+    }
 }
-
-
 
 $sql = "SELECT * FROM stock ORDER BY id ASC";
 $result = mysqli_query($connection, $sql);
@@ -101,6 +110,44 @@ $result = mysqli_query($connection, $sql);
   </div>
 </div>
 
+<!-- Modal de Confirmación de Actualización -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Confirmar Actualización</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="updateMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación de Actualización de Precio -->
+<div class="modal fade" id="updatePriceModal" tabindex="-1" aria-labelledby="updatePriceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePriceModalLabel">Confirmar Actualización de Precio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="updatePriceMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="confirmPriceUpdate()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark">
@@ -120,13 +167,19 @@ $result = mysqli_query($connection, $sql);
                         <td><?= htmlspecialchars($row['nombre_producto']) ?></td>
                         <td><?= htmlspecialchars($row['marca']) ?></td>
                         <td>
-                            <form method="POST" class="d-flex align-items-center">
+                            <form method="POST" class="d-flex align-items-center" onsubmit="event.preventDefault(); confirmUpdateQuantity(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre_producto']) ?>', this.cantidad.value, this);">
                                 <input type="number" name="cantidad" class="form-control me-2" value="<?= $row['cantidad'] ?>" min="0">
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                                 <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
                             </form>
                         </td>
-                        <td>$<?= number_format($row['precio_unitario'], 2, ',', '.') ?></td>
+                        <td>
+                            <form method="POST" class="d-flex align-items-center" onsubmit="event.preventDefault(); confirmPriceUpdateQuantity(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre_producto']) ?>', this.precio.value, this);">
+                                <input type="number" name="precio" class="form-control me-2" value="<?= $row['precio_unitario'] ?>" min="0" step="0.01">
+                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                            </form>
+                        </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" 
                                     onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre_producto']) ?>')">
@@ -142,6 +195,9 @@ $result = mysqli_query($connection, $sql);
 
 <script>
 let currentDeleteId = null;
+let currentUpdateId = null;
+let currentUpdateForm = null;
+let currentPriceUpdateForm = null;
 
 function confirmDelete(id, nombre) {
     currentDeleteId = id;
@@ -175,6 +231,33 @@ function deleteProduct() {
         console.error('Error:', error);
         alert('Error al eliminar el producto');
     });
+}
+
+function confirmUpdateQuantity(id, nombre, cantidad, form) {
+    currentUpdateId = id;
+    currentUpdateForm = form;
+    document.getElementById('updateMessage').textContent = `¿Desea actualizar la cantidad de "${nombre}" a ${cantidad}?`;
+    const updateModal = new bootstrap.Modal(document.getElementById('updateModal'));
+    updateModal.show();
+}
+
+function confirmUpdate() {
+    if (currentUpdateForm) {
+        currentUpdateForm.submit();
+    }
+}
+
+function confirmPriceUpdateQuantity(id, nombre, precio, form) {
+    currentPriceUpdateForm = form;
+    document.getElementById('updatePriceMessage').textContent = `¿Desea actualizar el precio de "${nombre}" a $${precio}?`;
+    const updatePriceModal = new bootstrap.Modal(document.getElementById('updatePriceModal'));
+    updatePriceModal.show();
+}
+
+function confirmPriceUpdate() {
+    if (currentPriceUpdateForm) {
+        currentPriceUpdateForm.submit();
+    }
 }
 </script>
 
