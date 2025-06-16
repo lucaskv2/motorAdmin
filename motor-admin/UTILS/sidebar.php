@@ -66,6 +66,9 @@
         <li class="list-group-item border-0">
             <a href="../ADMINISTRADOR/asignar-trabajos.php" class="sidebar-link text-dark">📁 Asignar Trabajos</a>
         </li>
+        <li class="list-group-item border-0">
+            <a href="../ADMINISTRADOR/solicitud-presupuesto.php" class="sidebar-link text-dark">Solicitudes de Presupuesto</a>
+        </li>
     </ul>
 
 

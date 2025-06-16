@@ -1,4 +1,4 @@
--- 1. Crear la base de datos
+/*-- 1. Crear la base de datos
 CREATE DATABASE IF NOT EXISTS inventario_db;
 
 -- 2. Seleccionar la base de datos
@@ -13,7 +13,7 @@ CREATE TABLE productos (
     cantidad INT NOT NULL DEFAULT 0,
     precio_unitario DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
     total DECIMAL(10, 2) -- Columna para almacenar el total. Considera si lo necesitas.
-);
+);*/
 
 -- BASE DE DATOS Y 
 CREATE DATABASE taller_mecanico;
@@ -69,9 +69,20 @@ CREATE TABLE trabajos (
     estado ENUM('Pendiente', 'En progreso', 'Finalizado') DEFAULT 'Pendiente',
     informe TEXT,
     fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (nombre_usuario) REFERENCES usuarios(nombre),
-    FOREIGN KEY (nombre_empleado) REFERENCES empleado(nombre)
+    FOREIGN KEY (nombre_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (nombre_empleado) REFERENCES empleado(id)
 );
+
+CREATE TABLE consultas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    servicio VARCHAR(100) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 /*
 DELIMITER //
 

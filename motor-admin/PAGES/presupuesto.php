@@ -43,7 +43,7 @@
         </div>
         </div>
 
-        <form action="procesar.php" method="POST" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
+        <form action="../php/procesar_consultas.php" method="POST" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
             <div class="mb-3 text-start">
                 <label for="nombre" class="form-label">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -58,10 +58,10 @@
                 <label for="servicio" class="form-label">Servicio:</label>
                 <select id="pais" name="pais" class="form-select" required>
                 <option value="">-- Selecciona el servicio --</option>
-                <option value="arg">Cambio de aceite</option>
-                <option value="mex">Cambio de ruedas</option>
-                <option value="col">Cambio de frenos</option>
-                <option value="esp">Chequeo general</option>
+                <option value="Cambio de Aceite">Cambio de aceite</option>
+                <option value="Cambio de ruedas">Cambio de ruedas</option>
+                <option value="Cambio de frenos">Cambio de frenos</option>
+                <option value="Chequeo General">Chequeo general</option>
                 <option value="otro">Otro</option>
                 </select>
             </div>
