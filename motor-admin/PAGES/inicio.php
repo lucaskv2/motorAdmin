@@ -78,7 +78,9 @@
             <p>Proveer servicios de mantenimiento y reparación automotriz de la más alta calidad, 
               garantizando la seguridad, el rendimiento y la durabilidad de cada vehículo, 
               superando las expectativas de nuestros clientes a través de la excelencia y la confianza.</p>
-            <a href="./turnos.php"><button class="btn btn-primary mt-2">Reserva tu turno</button></a>
+            <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+              Reserva tu turno
+            </button>
           </div>
           <div class="col-md-6 text-center">
             <img src="../images/mision-vision.jpg" alt="fotoCalendario" class="img-fluid rounded w-100">
