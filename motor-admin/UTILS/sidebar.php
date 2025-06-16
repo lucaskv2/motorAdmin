@@ -1,3 +1,13 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+}
+        if (isset($_SESSION['nombre']))
+        {
+          $nombre=$_SESSION['nombre'];
+          $apellido=$_SESSION['apellido'];
+        } 
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,7 +56,7 @@
     <!-- Imagen de perfil -->
      <button type="button" class="btn-close align-self-end" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
     <img src="ruta/a/tu/imagen.png" alt="Admin" class="rounded-circle mb-2" style="width: 80px; height: 80px; object-fit: cover;">
-    <h5 class="offcanvas-title fw-bold" id="adminSidebarLabel">Karthi Madesh</h5>
+    <h5 class="offcanvas-title fw-bold" id="adminSidebarLabel"><?php echo htmlspecialchars($nombre); ?></h5>
     <span class="azul-panel mb-3">Admin</span>
     
   </div>
