@@ -1,25 +1,21 @@
 <?php
 include("../connection.php"); // Asegurate que este archivo tenga tu conexión a la BD
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nombre = trim($_POST["nombre"]);
-    $email = trim($_POST["email"]);
-    $servicio = trim($_POST["pais"]);
-    $mensaje = trim($_POST["mensaje"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $connection->real_escape_string($_POST['nombre']);
+    $email = $connection->real_escape_string($_POST['email']);
+    $servicio = $connection->real_escape_string($_POST['servicio']);
+    $mensaje = $connection->real_escape_string($_POST['mensaje']);
+    
+    $sql = "INSERT INTO consultas (nombre, email, servicio, mensaje) 
+            VALUES ('$nombre', '$email', '$servicio', '$mensaje')";
 
-    if (!empty($nombre) && !empty($email) && !empty($servicio) && !empty($mensaje)) {
-        $sql = "INSERT INTO consultas (nombre, email, servicio, mensaje) VALUES (?, ?, ?, ?)";
-        $stmt = $connection->prepare($sql);
-        $stmt->bind_param("ssss", $nombre, $email, $servicio, $mensaje);
-
-        if ($stmt->execute()) {
-            header("Location: gracias.html");
-            exit;
-        } else {
-            echo "Error al guardar los datos.";
-        }
+    if ($connection->query($sql) === TRUE) {
+        echo json_encode(['success' => true, 'message' => 'Mensaje enviado correctamente']);
     } else {
-        echo "Por favor, completa todos los campos.";
+        echo json_encode(['success' => false, 'message' => 'Error al enviar el mensaje']);
     }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
 }
 ?>
