@@ -99,30 +99,30 @@ session_start();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../php/register.php" method="POST">
+          <form id="registerForm" action="../php/register.php" method="POST">
             <div class="mb-3">
               <label for="registerName" class="form-label">Nombre</label>
-              <input type="text" name="nombre" class="form-control" id="registerName">
+              <input type="text" name="nombre" class="form-control" id="registerName" required>
             </div>
             <div class="mb-3">
               <label for="registerEmail" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="registerEmail">
+              <input type="email" name="email" class="form-control" id="registerEmail" required>
             </div>
             <div class="mb-3">
               <label for="registerDNI" class="form-label">DNI</label>
-              <input type="number" name="dni"  class="form-control" id="registerDNI">
+              <input type="number" name="dni"  class="form-control" id="registerDNI" required>
             </div>
             <div class="mb-3">
               <label for="registerPatente" class="form-label">Patente</label>
-              <input type="text" name="patente" class="form-control" id="registerPatente">
+              <input type="text" name="patente" class="form-control" id="registerPatente" required>
             </div>
             <div class="mb-3">
               <label for="registerModelo" class="form-label">Modelo</label>
-              <input type="text" name="modelo" class="form-control" id="registerModelo">
+              <input type="text" name="modelo" class="form-control" id="registerModelo" required>
             </div>
             <div class="mb-3">
               <label for="registerPassword" class="form-label">Contraseña</label>
-              <input type="password" name="contrasenia" class="form-control" id="registerPassword">
+              <input type="password" name="contrasenia" class="form-control" id="registerPassword" required>
             </div>
             <button type="submit" class="btn btn-success">Registrarse</button>
           </form>
@@ -130,6 +130,25 @@ session_start();
       </div>
     </div>
   </div>
+
+  <!-- Modal de Éxito -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="successMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.reload()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
    /* document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -174,5 +193,41 @@ session_start();
         errorModal.show();
       });
     });
-  */</script>
+  */
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('../php/register.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Cerrar el modal de registro
+            const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+            registerModal.hide();
+            
+            // Mostrar el modal de éxito
+            document.getElementById('successMessage').textContent = data.message;
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        } else {
+            // Mostrar el error en el modal de error
+            document.getElementById('errorMessage').textContent = data.message;
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+    });
+  });
+  </script>
 </body>
