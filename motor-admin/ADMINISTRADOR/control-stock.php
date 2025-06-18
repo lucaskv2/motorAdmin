@@ -60,7 +60,7 @@ $result = mysqli_query($connection, $sql);
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="row g-3" action="../php/agregar_producto.php" method="POST">
+        <form class="row g-3" action="../php/agregar_producto.php" method="POST" enctype="multipart/form-data">
             <div class="col-md-6">
                 <input name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
             </div>
@@ -72,6 +72,10 @@ $result = mysqli_query($connection, $sql);
             </div>
             <div class="col-md-6">
                 <input name="Precio" type="number" class="form-control" placeholder="Precio">
+            </div>
+            <div class="col-md-12">
+                <label for="imagen" class="form-label">Subir archivo (foto del producto):</label>
+                <input type="file" name="imagen" id="imagen" class="form-control" accept="image/*">
             </div>
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary px-5">Enviar</button>
@@ -162,6 +166,7 @@ $result = mysqli_query($connection, $sql);
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
+                    <th>Foto</th>
                     <th>Nombre del Producto</th>
                     <th>Marca</th>
                     <th>Cantidad</th>
@@ -173,6 +178,13 @@ $result = mysqli_query($connection, $sql);
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                         <td><?= $row['id'] ?></td>
+                        <td>
+                            <?php if (!empty($row['imagen'])): ?>
+                                <img src="<?= htmlspecialchars($row['imagen']) ?>" alt="Foto producto" style="width:60px; height:60px; object-fit:cover; border-radius:10px;">
+                            <?php else: ?>
+                                <span class="text-muted">Sin foto</span>
+                            <?php endif; ?>
+                        </td>
                         <td><?= htmlspecialchars($row['nombre_producto']) ?></td>
                         <td><?= htmlspecialchars($row['marca']) ?></td>
                         <td>
