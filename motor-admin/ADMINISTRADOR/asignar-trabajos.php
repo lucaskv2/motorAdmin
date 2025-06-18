@@ -101,6 +101,7 @@ if (!isset($_SESSION)) {
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
+            <button id="btnTrabajosRealizados" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#modalTrabajosFinalizados">Trabajos Realizados</button>
         </form>
 
         <table id="tabla-asignar-trabajo" class="table table-bordered table-hover">
@@ -118,16 +119,15 @@ if (!isset($_SESSION)) {
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
-                    <tr data-trabajo-id="<?= $row['id'] ?>">
+                    <tr data-trabajo-id="<?= $row['id'] ?>" data-estado="<?= $row['estado'] ?>" data-informe="<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>">
                         <td><?= htmlspecialchars($row['nombre']) ?></td>
                         <td><?= htmlspecialchars($row['patente']) ?></td>
                         <td><?= htmlspecialchars($row['modelo']) ?></td>
                         <td>
                             <select class="form-select form-select-sm empleado-select" 
                                     data-trabajo-id="<?= $row['id'] ?>" 
-                                    onchange="actualizarEmpleado(this)">
+                                    onchange="actualizarEmpleado(this)" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>
                                 <?php 
-                                // Resetear el puntero del resultado de empleados
                                 mysqli_data_seek($employees, 0);
                                 while($e = mysqli_fetch_assoc($employees)): 
                                 ?>
@@ -141,7 +141,7 @@ if (!isset($_SESSION)) {
                         <td>
                             <form method="POST" action="../php/actualizar-estado.php">
                                 <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
-                                <select name="estado" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <select name="estado" class="form-select form-select-sm estado-select" onchange="this.form.submit()" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>
                                     <option value="Pendiente" <?= $row['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
                                     <option value="En progreso" <?= $row['estado'] == 'En progreso' ? 'selected' : '' ?>>En progreso</option>
                                     <option value="Finalizado" <?= $row['estado'] == 'Finalizado' ? 'selected' : '' ?>>Finalizado</option>
@@ -154,8 +154,7 @@ if (!isset($_SESSION)) {
                                 type="button" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#modalInforme"
-                                onclick="abrirModalInforme(<?= $row['id'] ?>, `<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>`)"
-                            >
+                                onclick="abrirModalInforme(<?= $row['id'] ?>, `<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>`)">
                                 Ver
                             </button>
                             <div class="collapse" id="informe<?= $row['id'] ?>">
@@ -163,7 +162,7 @@ if (!isset($_SESSION)) {
                             </div>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="editarTrabajo(<?= $row['id'] ?>, `<?= htmlspecialchars($row['descripcion'], ENT_QUOTES) ?>`)">Editar</button>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="editarTrabajo(<?= $row['id'] ?>, `<?= htmlspecialchars($row['descripcion'], ENT_QUOTES) ?>`)" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>Editar</button>
                             <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminarTrabajo(<?= $row['id'] ?>)">Eliminar</button>
                         </td>
                     </tr>
@@ -256,6 +255,40 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal Trabajos Finalizados -->
+    <div class="modal fade" id="modalTrabajosFinalizados" tabindex="-1" aria-labelledby="modalTrabajosFinalizadosLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTrabajosFinalizadosLabel">Trabajos Finalizados</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="table-success">
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Patente</th>
+                    <th>Modelo</th>
+                    <th>Empleado</th>
+                    <th>Descripción</th>
+                    <th>Informe</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyFinalizados">
+                  <!-- Se llenará por JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -441,17 +474,97 @@ if (!isset($_SESSION)) {
             this.setAttribute('data-original-value', this.value);
         });
     });
+
+    // Colorear el select de estado según el valor y bloquear si es finalizado
+    function colorearEstados() {
+        document.querySelectorAll('.estado-select').forEach(function(select) {
+            select.classList.remove('bg-success', 'bg-warning', 'bg-danger', 'text-white');
+            if (select.value === 'Finalizado') {
+                select.classList.add('bg-success', 'text-white');
+                select.disabled = true;
+                // Solo deshabilitar el select de empleado, pero mantener el botón de informe habilitado
+                const tr = select.closest('tr');
+                if (tr) {
+                    const empleadoSelect = tr.querySelector('.empleado-select');
+                    if (empleadoSelect) empleadoSelect.disabled = true;
+                    const btnEditar = tr.querySelector('.btn-warning');
+                    if (btnEditar) btnEditar.disabled = true;
+                    // NO deshabilitar el botón de informe
+                }
+            } else if (select.value === 'En progreso') {
+                select.classList.add('bg-warning');
+                select.disabled = false;
+                const tr = select.closest('tr');
+                if (tr) {
+                    const empleadoSelect = tr.querySelector('.empleado-select');
+                    if (empleadoSelect) empleadoSelect.disabled = false;
+                    const btnEditar = tr.querySelector('.btn-warning');
+                    if (btnEditar) btnEditar.disabled = false;
+                }
+            } else if (select.value === 'Pendiente') {
+                select.classList.add('bg-danger', 'text-white');
+                select.disabled = false;
+                const tr = select.closest('tr');
+                if (tr) {
+                    const empleadoSelect = tr.querySelector('.empleado-select');
+                    if (empleadoSelect) empleadoSelect.disabled = false;
+                    const btnEditar = tr.querySelector('.btn-warning');
+                    if (btnEditar) btnEditar.disabled = false;
+                }
+            }
+        });
+    }
+    colorearEstados();
+    document.querySelectorAll('.estado-select').forEach(function(select) {
+        select.addEventListener('change', colorearEstados);
+    });
+
+    // Llenar el modal de trabajos finalizados
+    function llenarModalFinalizados() {
+        const filas = document.querySelectorAll('#tabla-asignar-trabajo tbody tr');
+        const tbody = document.getElementById('tbodyFinalizados');
+        tbody.innerHTML = '';
+        filas.forEach(function(tr) {
+            if (tr.getAttribute('data-estado') === 'Finalizado') {
+                const tds = tr.querySelectorAll('td');
+                const informe = tr.getAttribute('data-informe') || '';
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${tds[0].innerText}</td>
+                    <td>${tds[1].innerText}</td>
+                    <td>${tds[2].innerText}</td>
+                    <td>${tds[3].querySelector('select') ? tds[3].querySelector('select').selectedOptions[0].text : ''}</td>
+                    <td>${tds[4].innerText}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="verInformeFinalizado('${informe.replace(/'/g, "\\'")}')">
+                            Ver Informe
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            }
+        });
+    }
+    document.getElementById('btnTrabajosRealizados').addEventListener('click', llenarModalFinalizados);
+
+    function verInformeFinalizado(informe) {
+        if (informe && informe.trim() !== '') {
+            alert('Informe del trabajo:\n\n' + informe);
+        } else {
+            alert('No hay informe disponible para este trabajo.');
+        }
+    }
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#tabla-asignar-trabajo').DataTable({
-            order: [[1, 'asc']],
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-            }
+            var table = $('#tabla-asignar-trabajo').DataTable({
+                order: [[1, 'asc']],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
             });
         });
     </script>
