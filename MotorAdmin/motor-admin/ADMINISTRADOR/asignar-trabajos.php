@@ -1,0 +1,459 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+}
+        if ($_SESSION['rol']!=='Admin')
+        {
+          header("Location:../PAGES/index.php");
+        } 
+ ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handsontable - Hoja de Cálculo Web</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+</head>
+<body>
+    <?php
+        include("../UTILS/sidebar.php");
+        include("../connection.php");
+        // Obtener lista de clientes
+        $clients = mysqli_query($connection, "SELECT id, nombre, patente, modelo FROM usuarios");
+        // Obtener lista de empleados
+        $employees = mysqli_query($connection, "SELECT id, nombre FROM empleado");
+        $queryTrabajos = "
+            SELECT 
+                trabajos.id,
+                usuarios.nombre AS nombre,
+                usuarios.patente,
+                usuarios.modelo,
+                trabajos.id_empleado,
+                empleado.nombre AS nombre_empleado,
+                trabajos.descripcion,
+                trabajos.estado,
+                trabajos.informe
+            FROM trabajos
+            JOIN usuarios ON trabajos.id_usuario = usuarios.id
+            JOIN empleado ON trabajos.id_empleado = empleado.id
+            ORDER BY trabajos.id DESC
+        ";
+        $resultUsuario = mysqli_query($connection, $queryTrabajos);
+
+        $trabajosActivos = mysqli_query($connection, "
+            SELECT trabajos.id, trabajos.id_usuario, trabajos.id_empleado, trabajos.estado, usuarios.patente
+            FROM trabajos
+            JOIN usuarios ON trabajos.id_usuario = usuarios.id
+            WHERE trabajos.estado != 'Finalizado'
+        ");
+
+        $listaTrabajos = [];
+        while($t = mysqli_fetch_assoc($trabajosActivos)) {
+            $listaTrabajos[] = $t;
+        }
+
+    ?>
+    
+    
+    <div class="container my-5">
+        <h2>Asignar Nuevo Trabajo</h2>
+        <form action="../php/guardar-trabajo.php" method="POST"  class="my-5">
+            <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select id="cliente" name="id_usuario" class="form-select" required>
+                <option value="">– Seleccioná cliente –</option>
+                <?php while($c = mysqli_fetch_assoc($clients)): ?>
+                <option value="<?= $c['id'] ?>"
+                    data-patente="<?= htmlspecialchars($c['patente']) ?>"
+                    data-modelo="<?= htmlspecialchars($c['modelo']) ?>">
+                    <?= htmlspecialchars($c['nombre']) ?>
+                </option>
+                <?php endwhile; ?>
+            </select>
+            </div>
+
+            <div class="row">
+            <div class="mb-3 col">
+                <label class="form-label">Patente</label>
+                <input id="patente" type="text" class="form-control" readonly>
+            </div>
+            <div class="mb-3 col">
+                <label class="form-label">Modelo</label>
+                <input id="modelo" type="text" class="form-control" readonly>
+            </div>
+            </div>
+
+            <div class="mb-3">
+            <label for="empleado" class="form-label">Empleado Asignado</label>
+            <select id="empleado" name="id_empleado" class="form-select" required>
+                <option value="">– Elegí empleado –</option>
+                <?php while($e = mysqli_fetch_assoc($employees)): ?>
+                <option value="<?= $e['id'] ?>"><?= htmlspecialchars($e['nombre']) ?></option>
+                <?php endwhile; ?>
+            </select>
+            </div>
+
+            <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción del Trabajo</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
+        </form>
+
+        <table id="tabla-asignar-trabajo" class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Patente</th>
+                    <th>Modelo</th>
+                    <th>Empleado Asignado</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Informe</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
+                    <tr data-trabajo-id="<?= $row['id'] ?>">
+                        <td><?= htmlspecialchars($row['nombre']) ?></td>
+                        <td><?= htmlspecialchars($row['patente']) ?></td>
+                        <td><?= htmlspecialchars($row['modelo']) ?></td>
+                        <td>
+                            <select class="form-select form-select-sm empleado-select" 
+                                    data-trabajo-id="<?= $row['id'] ?>" 
+                                    onchange="actualizarEmpleado(this)">
+                                <?php 
+                                // Resetear el puntero del resultado de empleados
+                                mysqli_data_seek($employees, 0);
+                                while($e = mysqli_fetch_assoc($employees)): 
+                                ?>
+                                    <option value="<?= $e['id'] ?>" <?= $e['id'] == $row['id_empleado'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($e['nombre']) ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
+                        </td>
+                        <td><?= htmlspecialchars($row['descripcion']) ?></td>
+                        <td>
+                            <form method="POST" action="../php/actualizar-estado.php">
+                                <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
+                                <select name="estado" class="form-select form-select-sm" onchange="this.form.submit()">
+                                    <option value="Pendiente" <?= $row['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                                    <option value="En progreso" <?= $row['estado'] == 'En progreso' ? 'selected' : '' ?>>En progreso</option>
+                                    <option value="Finalizado" <?= $row['estado'] == 'Finalizado' ? 'selected' : '' ?>>Finalizado</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <button 
+                                class="btn btn-info btn-sm" 
+                                type="button" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalInforme"
+                                onclick="abrirModalInforme(<?= $row['id'] ?>, `<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>`)"
+                            >
+                                Ver
+                            </button>
+                            <div class="collapse" id="informe<?= $row['id'] ?>">
+                                <div class="card card-body mt-2"><?= nl2br(htmlspecialchars($row['informe'])) ?></div>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="editarTrabajo(<?= $row['id'] ?>, `<?= htmlspecialchars($row['descripcion'], ENT_QUOTES) ?>`)">Editar</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminarTrabajo(<?= $row['id'] ?>)">Eliminar</button>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de Confirmación para Eliminar Trabajo -->
+    <div class="modal fade" id="modalEliminarTrabajo" tabindex="-1" aria-labelledby="modalEliminarTrabajoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEliminarTrabajoLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea eliminar el Trabajo Asignado?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="eliminarTrabajo()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Éxito -->
+    <div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExitoLabel">Éxito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Trabajo eliminado correctamente</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalInforme" tabindex="-1" aria-labelledby="modalInformeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <form id="formInforme" method="POST" action="../php/guardar-informe.php">
+                <div class="modal-header">
+                <h5 class="modal-title" id="modalInformeLabel">Informe del Trabajo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                <input type="hidden" name="id_trabajo" id="modalTrabajoId">
+                <div class="mb-3">
+                    <label for="informeTexto" class="form-label">Informe</label>
+                    <textarea class="form-control" id="informeTexto" name="informe" rows="6" required></textarea>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edición -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarLabel">Editar Descripción</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditar">
+                        <input type="hidden" id="editTrabajoId">
+                        <div class="mb-3">
+                            <label for="editDescripcion" class="form-label">Descripción del Trabajo</label>
+                            <textarea class="form-control" id="editDescripcion" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarEdicion()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Llenar patente y modelo según cliente seleccionado
+    document.getElementById('cliente').addEventListener('change', function() {
+    const selected = this.options[this.selectedIndex];
+    document.getElementById('patente').value = selected.getAttribute('data-patente') || '';
+    document.getElementById('modelo').value = selected.getAttribute('data-modelo') || '';
+    });
+
+    function abrirModalInforme(id, informe) {
+        document.getElementById('modalTrabajoId').value = id;
+        document.getElementById('informeTexto').value = informe;
+    }
+
+    const trabajosActivos = <?= json_encode($listaTrabajos) ?>;
+
+    document.querySelector('form[action="../php/guardar-trabajo.php"]').addEventListener('submit', function(e) {
+        const idEmpleado = document.getElementById('empleado').value;
+        const selectCliente = document.getElementById('cliente');
+        const idCliente = selectCliente.value;
+        const patente = selectCliente.options[selectCliente.selectedIndex]?.getAttribute('data-patente');
+
+        let empleadoAsignado = false;
+        let vehiculoAsignado = false;
+
+        trabajosActivos.forEach(trabajo => {
+            if (trabajo.id_empleado === idEmpleado) {
+                empleadoAsignado = true;
+            }
+            if (trabajo.patente === patente) {
+                vehiculoAsignado = true;
+            }
+        });
+
+        if (empleadoAsignado || vehiculoAsignado) {
+            let mensaje = "Atención:\n";
+            if (empleadoAsignado) mensaje += "- El empleado ya está asignado a un trabajo activo.\n";
+            if (vehiculoAsignado) mensaje += "- El vehículo ya está asignado a un trabajo activo.\n";
+            mensaje += "¿Deseás continuar de todas formas?";
+
+            if (!confirm(mensaje)) {
+                e.preventDefault(); // Cancelar envío
+            }
+        }
+    });
+
+    let trabajoIdAEliminar = null;
+
+    function confirmarEliminarTrabajo(id) {
+        trabajoIdAEliminar = id;
+        const modal = new bootstrap.Modal(document.getElementById('modalEliminarTrabajo'));
+        modal.show();
+    }
+
+    function eliminarTrabajo() {
+        if (trabajoIdAEliminar) {
+            const formData = new FormData();
+            formData.append('id', trabajoIdAEliminar);
+
+            fetch('../php/eliminar_trabajo.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Cerrar el modal de confirmación
+                    const modalConfirmacion = bootstrap.Modal.getInstance(document.getElementById('modalEliminarTrabajo'));
+                    modalConfirmacion.hide();
+                    
+                    // Obtener la instancia de DataTable
+                    const tabla = $('#tabla-asignar-trabajo').DataTable();
+                    
+                    // Encontrar y eliminar la fila de la tabla
+                    const fila = tabla.row(`tr[data-trabajo-id="${trabajoIdAEliminar}"]`);
+                    fila.remove();
+                    
+                    // Redibujar la tabla
+                    tabla.draw();
+                    
+                    // Mostrar modal de éxito
+                    const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
+                    modalExito.show();
+                } else {
+                    alert('Error al eliminar el trabajo: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al eliminar el trabajo');
+            });
+        }
+    }
+
+    let trabajoIdAEditar = null;
+
+    function editarTrabajo(id, descripcion) {
+        trabajoIdAEditar = id;
+        document.getElementById('editTrabajoId').value = id;
+        document.getElementById('editDescripcion').value = descripcion;
+        
+        const modal = new bootstrap.Modal(document.getElementById('modalEditar'));
+        modal.show();
+    }
+
+    function guardarEdicion() {
+        if (!trabajoIdAEditar) return;
+
+        const descripcion = document.getElementById('editDescripcion').value;
+        const formData = new FormData();
+        formData.append('id', trabajoIdAEditar);
+        formData.append('descripcion', descripcion);
+
+        fetch('../php/actualizar_descripcion.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Cerrar el modal de edición
+                const modalEdicion = bootstrap.Modal.getInstance(document.getElementById('modalEditar'));
+                modalEdicion.hide();
+
+                // Actualizar la descripción en la tabla
+                const tabla = $('#tabla-asignar-trabajo').DataTable();
+                const fila = tabla.row(`tr[data-trabajo-id="${trabajoIdAEditar}"]`);
+                const datos = fila.data();
+                datos[4] = descripcion; // La descripción está en la columna 5 (índice 4)
+                fila.data(datos);
+
+                // Mostrar modal de éxito
+                const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
+                document.querySelector('#modalExito .modal-body p').textContent = 'Descripción actualizada correctamente';
+                modalExito.show();
+            } else {
+                alert('Error al actualizar la descripción: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al actualizar la descripción');
+        });
+    }
+
+    function actualizarEmpleado(select) {
+        const trabajoId = select.getAttribute('data-trabajo-id');
+        const empleadoId = select.value;
+        
+        const formData = new FormData();
+        formData.append('id', trabajoId);
+        formData.append('id_empleado', empleadoId);
+
+        fetch('../php/actualizar_empleado.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Mostrar modal de éxito
+                const modalExito = new bootstrap.Modal(document.getElementById('modalExito'));
+                document.querySelector('#modalExito .modal-body p').textContent = 'Empleado actualizado correctamente';
+                modalExito.show();
+            } else {
+                alert('Error al actualizar el empleado: ' + data.message);
+                // Revertir la selección en caso de error
+                select.value = select.getAttribute('data-original-value');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al actualizar el empleado');
+            // Revertir la selección en caso de error
+            select.value = select.getAttribute('data-original-value');
+        });
+    }
+
+    // Guardar el valor original del select cuando se abre
+    document.querySelectorAll('.empleado-select').forEach(select => {
+        select.addEventListener('focus', function() {
+            this.setAttribute('data-original-value', this.value);
+        });
+    });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tabla-asignar-trabajo').DataTable({
+            order: [[1, 'asc']],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
+            });
+        });
+    </script>
+</body>
+</html>

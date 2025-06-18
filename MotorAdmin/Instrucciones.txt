@@ -1,0 +1,181 @@
+Pagina Principal: http://localhost/motor-admin/PAGES/index.php
+
+
+
+👤 Administrador
+Nombre: Lucas Vergara
+
+Email: admin@motormanager.com
+
+DNI: 30245678
+
+Patente: ADM001
+
+Modelo: AdminCar
+
+Contraseña: AdminSecure2025!
+
+👤 Administrador
+Nombre: Admin
+
+Email: admin@gmail.com
+
+Contraseña: admin123
+
+🔹 1.
+Nombre: Valentina Ríos
+
+Email: valen.rios@gmail.com
+
+DNI: 38245123
+
+Patente: ACB134
+
+Modelo: Toyota Corolla
+
+Contraseña: Valen2025
+
+🔹 2.
+Nombre: Nicolás Fernández
+
+Email: nico.fernandez@gmail.com
+
+DNI: 41728954
+
+Patente: BCD981
+
+Modelo: Peugeot 208
+
+Contraseña: Nico208!
+
+🔹 3.
+Nombre: Camila González
+
+Email: cami.gon@gmail.com
+
+DNI: 39671285
+
+Patente: XYZ552
+
+Modelo: Ford Ka
+
+Contraseña: CamiKa123#
+
+🔹 4.
+Nombre: Martín López
+
+Email: martin.lopez@hotmail.com
+
+DNI: 40325689
+
+Patente: LOP768
+
+Modelo: Volkswagen Gol
+
+Contraseña: MartGol2025$
+
+🔹 5.
+Nombre: Carla Méndez
+
+Email: carla.mendez@yahoo.com
+
+DNI: 37451246
+
+Patente: MEN333
+
+Modelo: Fiat Argo
+
+Contraseña: ArgoFiat2025!
+
+🔹 6.
+Nombre: Diego Sosa
+
+Email: diego.sosa@gmail.com
+
+DNI: 41258975
+
+Patente: SOS789
+
+Modelo: Renault Logan
+
+Contraseña: Logan#Diego25
+
+🔹 7.
+Nombre: Julieta Ramírez
+
+Email: juli.ramirez@gmail.com
+
+DNI: 38945213
+
+Patente: RAM951
+
+Modelo: Honda Fit
+
+Contraseña: FitHonda123@
+
+🔹 8.
+Nombre: Tomás Herrera
+
+Email: tomi.herrera@gmail.com
+
+DNI: 40578912
+
+Patente: HER672
+
+Modelo: Chevrolet Onix
+
+Contraseña: OnixTomi24!
+
+🔹 9.
+Nombre: Lucía Benítez
+
+Email: lucia.benitez@gmail.com
+
+DNI: 38672145
+
+Patente: BEN487
+
+Modelo: Nissan March
+
+Contraseña: MarchNiss@2025
+
+🔹 10.
+Nombre: Facundo Díaz
+
+Email: facu.diaz@gmail.com
+
+DNI: 39258146
+
+Patente: DIA258
+
+Modelo: Citroën C3
+
+Contraseña: CitroenFacu25*
+
+🔹 11.
+Nombre: Antonella Ruiz
+
+Email: anto.ruiz@gmail.com
+
+DNI: 40215879
+
+Patente: RUI741
+
+Modelo: Toyota Yaris
+
+Contraseña: YarisAnto2025!
+
+🔹 12.
+Nombre: Bruno Castro
+
+Email: bruno.castro@gmail.com
+
+DNI: 38471652
+
+Patente: CAS963
+
+Modelo: Ford Focus
+
+Contraseña: FocusBruno25$
+
+
