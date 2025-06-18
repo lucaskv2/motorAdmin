@@ -30,7 +30,8 @@ CREATE TABLE stock (
     nombre_producto VARCHAR(100) NOT NULL,
     marca VARCHAR(50),
     cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10, 2)
+    precio_unitario DECIMAL(10, 2),
+    imagen VARCHAR(255)
 );
 
 CREATE TABLE empleado (
