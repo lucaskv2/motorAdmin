@@ -12,6 +12,10 @@
 </head>
 <body>
     <?php include("../UTILS/header-cliente-pages.php"); ?>
+    <?php
+    include '../connection.php';
+    $servicios = $connection->query("SELECT * FROM servicios");
+    ?>
 
     <section class="container text-center my-5 seccion-presupuestos">
         <h2 class="mb-5">Solicitar presupuesto</h2>
@@ -54,17 +58,13 @@
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
 
-            <div class="mb-3 text-start">
-                <label for="servicio" class="form-label">Servicio:</label>
-                <select id="servicio" name="servicio" class="form-select" required>
+            <select id="servicio" name="servicio" class="form-select" required>
                 <option value="">-- Selecciona el servicio --</option>
-                <option value="Cambio de Aceite">Cambio de aceite</option>
-                <option value="Cambio de ruedas">Cambio de ruedas</option>
-                <option value="Cambio de frenos">Cambio de frenos</option>
-                <option value="Chequeo General">Chequeo general</option>
+                <?php while ($row = $servicios->fetch_assoc()): ?>
+                    <option value="<?= $row['nombre'] ?>"><?= $row['nombre'] ?></option>
+                <?php endwhile ?>
                 <option value="otro">Otro</option>
-                </select>
-            </div>
+            </select>
 
             <div class="mb-3 text-start">
                 <label for="mensaje" class="form-label">Mensaje:</label>
