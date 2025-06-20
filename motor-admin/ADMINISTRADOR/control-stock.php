@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
     }
 }
 
-$sql = "SELECT * FROM stock ORDER BY id ASC";
+$sql = "SELECT * FROM stock ORDER BY id DESC";
 $result = mysqli_query($connection, $sql);
 ?>
 
