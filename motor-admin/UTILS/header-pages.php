@@ -31,7 +31,7 @@ session_start();
           </li>
         </ul>
         <div class="d-flex">
-          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
         </div>
       </div>
     </nav>
@@ -142,83 +142,54 @@ session_start();
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-   /* document.getElementById('loginForm').addEventListener('submit', function(e) {
+    // Abrir modal de login si la URL tiene ?login=1 y limpiar campos
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('login') === '1') {
+        // Limpiar campos
+        const email = document.getElementById('loginEmail');
+        const pass = document.getElementById('loginPassword');
+        if(email) email.value = '';
+        if(pass) pass.value = '';
+        // Abrir modal
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+      }
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      console.log('Form submitted');
       
       const formData = new FormData(this);
-      console.log('Form data:', Object.fromEntries(formData));
       
-      fetch('../php/logging.php', {
-        method: 'POST',
-        body: formData
+      fetch('../php/register.php', {
+          method: 'POST',
+          body: formData
       })
-      .then(response => {
-        console.log('Response received:', response);
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log('Data:', data);
-        if (data.success) {
-          window.location.reload();
-        } else {
-          // Cerrar el modal de login
-          const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-          loginModal.hide();
-          
-          // Mostrar el modal de error
-          document.getElementById('errorMessage').textContent = data.message;
-          const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-          errorModal.show();
-        }
+          if (data.success) {
+              // Cerrar el modal de registro
+              const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+              registerModal.hide();
+              
+              // Mostrar el modal de éxito
+              document.getElementById('successMessage').textContent = data.message;
+              const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+              successModal.show();
+          } else {
+              // Mostrar el error en el modal de error
+              document.getElementById('errorMessage').textContent = data.message;
+              const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+              errorModal.show();
+          }
       })
       .catch(error => {
-        console.error('Error:', error);
-        // Cerrar el modal de login
-        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-        loginModal.hide();
-        
-        // Mostrar el error en el modal
-        document.getElementById('errorMessage').textContent = 'Error al procesar la solicitud';
-        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-        errorModal.show();
+          console.error('Error:', error);
+          document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
+          const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+          errorModal.show();
       });
     });
-  */
-
-  document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    
-    fetch('../php/register.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Cerrar el modal de registro
-            const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-            registerModal.hide();
-            
-            // Mostrar el modal de éxito
-            document.getElementById('successMessage').textContent = data.message;
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-        } else {
-            // Mostrar el error en el modal de error
-            document.getElementById('errorMessage').textContent = data.message;
-            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-            errorModal.show();
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
-        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-        errorModal.show();
-    });
-  });
   </script>
 </body>
