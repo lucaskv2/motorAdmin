@@ -1,7 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
     session_start();
-    $email=($_SESSION['email']);
 }
 // Verificar si la sesión está activa y el rol es 'Admin'
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
@@ -33,48 +32,59 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
         <h2 class="mb-5">Solicitar presupuesto</h2>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5 animate__animated animate__pulse">
-        <div class="col">
-            <div class="card h-100 text-center p-3">
-            <i class="ri-oil-line fs-1 text-primary"></i>
-            <p class="mt-2">Chequeo y cambio de aceite, cambio líquido refrigerante, rellenar el sapito</p>
+            <div class="col">
+                <div class="card h-100 text-center p-3">
+                <i class="ri-oil-line fs-1 text-primary"></i>
+                <p class="mt-2">Chequeo y cambio de aceite, cambio líquido refrigerante, rellenar el sapito</p>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 text-center p-3">
-            <i class="ri-tools-fill fs-1 text-success"></i>
-            <p class="mt-2">Cambio de ruedas, cambio de frenos</p>
+            <div class="col">
+                <div class="card h-100 text-center p-3">
+                <i class="ri-tools-fill fs-1 text-success"></i>
+                <p class="mt-2">Cambio de ruedas, cambio de frenos</p>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 text-center p-3">
-            <i class="ri-steering-fill fs-1 text-warning"></i>
-            <p class="mt-2">Dirección y alineación, ajuste de balanceo</p>
+            <div class="col">
+                <div class="card h-100 text-center p-3">
+                <i class="ri-steering-fill fs-1 text-warning"></i>
+                <p class="mt-2">Dirección y alineación, ajuste de balanceo</p>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100 text-center p-3">
-            <i class="ri-car-fill fs-1 text-danger"></i>
-            <p class="mt-2">Chequeos generales</p>
+            <div class="col">
+                <div class="card h-100 text-center p-3">
+                <i class="ri-car-fill fs-1 text-danger"></i>
+                <p class="mt-2">Chequeos generales</p>
+                </div>
             </div>
-        </div>
         </div>
 
         <form id="formPresupuesto" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
             <div class="mb-3 text-start">
-        <label for="nombre" class="form-label">Nombre:</label>
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
+                    <?= isset($_SESSION['nombre']) ? 'readonly' : 'required' ?>
+                    >
+                </div>
+    <div class="mb-3 text-start">
+        <label for="email" class="form-label">Email:</label>
         <input
-            type="text"
+            type="email"
             class="form-control"
-            id="nombre"
-            name="nombre"
-            value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
-            <?= isset($_SESSION['nombre']) ? 'readonly' : 'required' ?>
+            id="email"
+            name="email"
+            value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>"
+            <?= isset($_SESSION['email']) ? 'readonly' : 'required' ?>
         >
     </div>
-
     
-     </div>
+    <div>
 
+        
             <select id="servicio" name="servicio" class="form-select" required>
                 <option value="">-- Selecciona el servicio --</option>
                 <?php while ($row = $servicios->fetch_assoc()): ?>

@@ -9,5 +9,5 @@ include("../connection.php");
 
     $sql = "INSERT INTO mensajes (nombre,email,asunto,telefono, mensaje) VALUES ('$nombre','$email', '$asunto','$telefono', '$mensaje')";
     mysqli_query($connection,$sql);
-   // header("Location: ../PAGES/contacto.php");
+    header("Location: ../PAGES/contacto.php");
 ?>
