@@ -81,30 +81,33 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <form action="../php/respuesta.php" method="POST">
                     <div class="mb-3">
                         <label for="modal-email">Email:</label>
-                        <input type="email" class="form-control" id="modal-email" readonly>
+                        <input name="email" type="email" class="form-control" id="modal-email" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="modal-asunto">Asunto:</label>
-                        <input type="text" class="form-control" id="modal-asunto" readonly>
+                        <input name="asunto" type="text" class="form-control" id="modal-asunto" readonly>
                     </div>
                     <div class="mb-3">
                         <strong>Teléfono:</strong> <span id="modal-telefono"></span>
                     </div>
                     <div class="mb-3">
                         <strong>Mensaje Original:</strong>
-                        <textarea class="form-control" rows="4" readonly id="modal-mensaje"></textarea>
+                        <input name="mensaje" class="form-control" rows="4" readonly id="modal-mensaje">
                     </div>
                     <div class="mb-3">
                         <label for="respuesta">Tu Respuesta:</label>
-                        <textarea class="form-control" rows="4" id="respuesta"></textarea>
+                        <textarea name="respuesta" class="form-control" rows="4" id="respuesta"></textarea>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                
                 </div>
         </div>
     </div>

@@ -160,8 +160,6 @@ session_start();
         if (email) email.value = '';
         if (pass) pass.value = '';
 
-       
-
         // Mostrar el modal de error si corresponde
         if (params.get('error') === '1') {
           loginModal.hide(); // Cierra el modal de login antes de abrir el error

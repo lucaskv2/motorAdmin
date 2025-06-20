@@ -70,3 +70,12 @@ CREATE TABLE servicios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE mensajes_respondidos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(100),
+  asunto VARCHAR(150),
+  mensaje TEXT,
+  respuesta TEXT,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
