@@ -15,13 +15,14 @@ if (!isset($_SESSION)) {
     <title>Handsontable - Hoja de Cálculo Web</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <?php
         include("../UTILS/sidebar.php");
         include("../connection.php");
         // Obtener lista de clientes
-        $clients = mysqli_query($connection, "SELECT id, nombre, patente, modelo FROM usuarios");
+        $clients = mysqli_query($connection, "SELECT id, nombre, patente, modelo FROM usuarios WHERE rol != 'Admin'");
         // Obtener lista de empleados
         $employees = mysqli_query($connection, "SELECT id, nombre FROM empleado");
         $queryTrabajos = "
@@ -62,7 +63,7 @@ if (!isset($_SESSION)) {
         <form action="../php/guardar-trabajo.php" method="POST"  class="my-5">
             <div class="mb-3">
             <label for="cliente" class="form-label">Cliente</label>
-            <select id="cliente" name="id_usuario" class="form-select" required>
+            <select id="cliente" name="id_usuario" class="form-select select2" required>
                 <option value="">– Seleccioná cliente –</option>
                 <?php while($c = mysqli_fetch_assoc($clients)): ?>
                 <option value="<?= $c['id'] ?>"
@@ -87,7 +88,7 @@ if (!isset($_SESSION)) {
 
             <div class="mb-3">
             <label for="empleado" class="form-label">Empleado Asignado</label>
-            <select id="empleado" name="id_empleado" class="form-select" required>
+            <select id="empleado" name="id_empleado" class="form-select select2" required>
                 <option value="">– Elegí empleado –</option>
                 <?php while($e = mysqli_fetch_assoc($employees)): ?>
                 <option value="<?= $e['id'] ?>"><?= htmlspecialchars($e['nombre']) ?></option>
@@ -565,6 +566,23 @@ if (!isset($_SESSION)) {
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
                 }
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Buscá una opción...",
+                allowClear: true
+            });
+
+            // Actualiza patente y modelo cuando se selecciona cliente
+            $('#cliente').on('change', function() {
+                var selected = $(this).find(':selected');
+                $('#patente').val(selected.data('patente') || '');
+                $('#modelo').val(selected.data('modelo') || '');
             });
         });
     </script>
