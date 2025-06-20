@@ -85,7 +85,7 @@
 
         <div class="col-md-4 mb-3 mb-md-0 d-flex flex-column align-items-center justify-content-start">
           <a class="nav-link" href="../PAGES/contacto.php">
-            <button class="btn-contacto">CONTÁCTATOS</button>
+            <button class="btn-contacto">CONTÁCTANOS</button>
           </a>
           <div class="mt-2 text-muted small">TODOS LOS DERECHOS RESERVADOS</div>
         </div>
