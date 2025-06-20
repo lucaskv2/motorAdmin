@@ -140,7 +140,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
                         </div>
                     </div>
                     <div class="col-md-6 text-column"> 
-                        <a href="https://maps.app.goo.gl/TUqV2r73oP1H2k2z9" target="_blank">Google Maps</a>
+                        <a href="https://www.google.com/maps/place/UTN+HAEDO/@-34.6405795,-58.6046059,17z/data=!4m6!3m5!1s0x95bc951c0fe2d9f5:0x9f1c540898efecbe!8m2!3d-34.6405839!4d-58.602031!16zL20vMGZtMjlw?authuser=0&entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank">Google Maps</a>
                         <p>Estamos ubicados en Paris 532, Haedo, Buenos Aires. Te invitamos a visitar 
                             nuestras instalaciones y experimentar la calidad de nuestro servicio de primera mano. 
                             ¡Te esperamos para brindarte la mejor atención y cuidado para tu vehículo!</p>

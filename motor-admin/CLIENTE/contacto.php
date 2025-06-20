@@ -1,3 +1,14 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+// Verificar si la sesión está activa y el rol es 'Admin'
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
+    header("Location: ../PAGES/index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +19,41 @@
 </head>
 <body>
     <?php
-        include("../UTILS/header-pages.php");
+        include("../UTILS/header-cliente-pages.php");
     ?>
     <section class="section container py-5">
         <h2 class="mb-4 text-center">Contáctanos</h2>
         <form class="row g-3" action="../php/procesar_formulario_de_contacto.php" method="POST">
             <div class="col-md-6">
-                <input name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
+                    <?= isset($_SESSION['nombre']) ? 'readonly' : 'required' ?>
+                >
             </div>
             <div class="col-md-6">
-                <input name="email" type="email" class="form-control" placeholder="Email" required>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>"
+                    <?= isset($_SESSION['email']) ? 'readonly' : 'required' ?>
+                >
             </div>
             <div class="col-md-6">
-                <input name="telefono" type="tel" class="form-control" placeholder="Teléfono">
+                <input
+                    type="tel"
+                    class="form-control"
+                    id="telefono"
+                    name="telefono"
+                    placeholder="Teléfono"
+                    value="<?= isset($_SESSION['telefono']) ? htmlspecialchars($_SESSION['telefono']) : '' ?>"
+                    <?= isset($_SESSION['telefono']) ? 'readonly' : 'required' ?>
+                >
             </div>
             <div class="col-md-6">
                 <input name="Asunto" type="text" class="form-control" placeholder="Asunto">

@@ -27,7 +27,7 @@ session_start();
             <a class="nav-link" href="../PAGES/servicios.php">Servicios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/contacto.php">Contacto</a>
+            <a class="nav-link" href="../PAGES/contacto.php">Contáctanos</a>
           </li>
         </ul>
         <div class="d-flex">
@@ -142,53 +142,73 @@ session_start();
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Abrir modal de login si la URL tiene ?login=1 y limpiar campos
-    document.addEventListener('DOMContentLoaded', function() {
+    // Crear instancia global de errorModal
+    const errorModalEl = document.getElementById('errorModal');
+    const errorModal = new bootstrap.Modal(errorModalEl);
+
+    document.addEventListener('DOMContentLoaded', function () {
       const params = new URLSearchParams(window.location.search);
+
+      const loginModalEl = document.getElementById('loginModal');
+      const loginModal = new bootstrap.Modal(loginModalEl);
+
+      // Si viene de login fallido
       if (params.get('login') === '1') {
         // Limpiar campos
         const email = document.getElementById('loginEmail');
         const pass = document.getElementById('loginPassword');
-        if(email) email.value = '';
-        if(pass) pass.value = '';
-        // Abrir modal
-        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
+        if (email) email.value = '';
+        if (pass) pass.value = '';
+
+       
+
+        // Mostrar el modal de error si corresponde
+        if (params.get('error') === '1') {
+          loginModal.hide(); // Cierra el modal de login antes de abrir el error
+          document.getElementById('errorMessage').textContent = "Email o contraseña incorrectos.";
+          errorModal.show();
+        }
+
+        // Enfocar campo email
+        const emailInput = loginModalEl.querySelector('input[type="text"], input[type="email"]');
+        if (emailInput) emailInput.focus();
+
+        // Limpiar la URL
+        window.history.replaceState({}, document.title, window.location.pathname);
       }
     });
 
+    // Evento del formulario de registro
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const formData = new FormData(this);
-      
+
       fetch('../php/register.php', {
-          method: 'POST',
-          body: formData
+        method: 'POST',
+        body: formData
       })
       .then(response => response.json())
       .then(data => {
-          if (data.success) {
-              // Cerrar el modal de registro
-              const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-              registerModal.hide();
-              
-              // Mostrar el modal de éxito
-              document.getElementById('successMessage').textContent = data.message;
-              const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-              successModal.show();
-          } else {
-              // Mostrar el error en el modal de error
-              document.getElementById('errorMessage').textContent = data.message;
-              const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-              errorModal.show();
-          }
+        if (data.success) {
+          // Cerrar el modal de registro
+          const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+          registerModal.hide();
+
+          // Mostrar el modal de éxito
+          document.getElementById('successMessage').textContent = data.message;
+          const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+          successModal.show();
+        } else {
+          // Mostrar el error en el modal de error
+          document.getElementById('errorMessage').textContent = data.message;
+          errorModal.show();
+        }
       })
       .catch(error => {
-          console.error('Error:', error);
-          document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
-          const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-          errorModal.show();
+        console.error('Error:', error);
+        document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
+        errorModal.show();
       });
     });
   </script>
