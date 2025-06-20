@@ -91,7 +91,7 @@ if (!isset($_SESSION)) {
       </li>
       <li class="list-group-item border-0">
           <a href="../ADMINISTRADOR/ABM-servicios.php" class="sidebar-link text-dark">
-              <i class="bi bi-receipt me-2"></i>ABM Servicios
+              <i class="bi bi-award-fill me-2"></i>ABM Servicios
           </a>
       </li>
     </ul>

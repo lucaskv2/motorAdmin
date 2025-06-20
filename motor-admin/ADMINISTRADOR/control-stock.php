@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
-    header("Location: ../PAGES/inicio.php");
+    header("Location: ../PAGES/index.php");
     exit();
 }
 ?>
@@ -294,6 +294,9 @@ function confirmPriceUpdate() {
     $(document).ready(function () {
         $('#tabla-stock').DataTable({
         order: [[1, 'asc']],
+        columnDefs: [
+          { orderable: false, targets: [4, 5, 6] } 
+        ],
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
         }

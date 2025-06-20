@@ -1,5 +1,12 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
+// Verificar si la sesión está activa y el rol es 'Admin'
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
+    header("Location: ../PAGES/index.php");
+    exit();
+}
 ?>
 <head>
   <meta charset="UTF-8" />

@@ -13,7 +13,7 @@ session_start();
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-      <a class="navbar-brand" href="../PAGES/inicio.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
+      <a class="navbar-brand" href="../PAGES/index.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@ session_start();
       <div class="collapse navbar-collapse bg-light" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="../PAGES/inicio.php">Inicio</a>
+            <a class="nav-link" href="../PAGES/index.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/servicios.php">Servicios</a>

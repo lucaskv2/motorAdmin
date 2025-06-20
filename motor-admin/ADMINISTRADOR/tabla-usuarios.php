@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
-    header("Location: ../PAGES/inicio.php");
+    header("Location: ../PAGES/index.php");
     exit();
 }
 ?>
@@ -226,18 +226,22 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         const tablaActiva = document.getElementById(`tabla-${tablaSelect.value}`);
         tablaActiva.classList.remove('d-none');
     });
-        $(document).ready(function () {
-            $('#tabla-usuario').DataTable({
+        $('#tabla-usuario').DataTable({
             order: [[1, 'asc']], 
+            columnDefs: [
+                { orderable: false, targets: [8, 9] } 
+            ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
             }
-            });
         });
 
         $(document).ready(function () {
             $('#tabla-empleado').DataTable({
-            order: [[1, 'asc']], 
+            order: [[1, 'asc']],
+            columnDefs: [
+                { orderable: false, targets: [8] } 
+            ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
             }
