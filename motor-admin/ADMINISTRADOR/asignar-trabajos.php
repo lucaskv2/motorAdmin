@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
         if ($_SESSION['rol']!=='Admin')
         {
-          header("Location:../PAGES/inicio.php");
+          header("Location:../PAGES/index.php");
         } 
  ?>
 <!DOCTYPE html>
@@ -577,26 +577,23 @@ if (!isset($_SESSION)) {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
             var table = $('#tabla-asignar-trabajo').DataTable({
                 order: [[1, 'asc']],
+                columnDefs: [
+                    { orderable: false, targets: [3, 5, 6, 7] } 
+                ],
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
                 }
             });
-        });
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
             $('.select2').select2({
                 placeholder: "Buscá una opción...",
                 allowClear: true
             });
 
-            // Actualiza patente y modelo cuando se selecciona cliente
             $('#cliente').on('change', function() {
                 var selected = $(this).find(':selected');
                 $('#patente').val(selected.data('patente') || '');

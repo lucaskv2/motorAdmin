@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
 // Verificar si la sesión está activa y el rol es 'Admin'
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
-    header("Location: ../PAGES/inicio.php");
+    header("Location: ../PAGES/index.php");
     exit();
 }
 ?>
@@ -34,7 +34,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         </form>
 
         <table id="tablaServicios" class="table table-bordered table-hover">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nombre del servicio</th>
@@ -122,6 +122,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         $(document).ready(function () {
             $('#tablaServicios').DataTable({
             order: [[1, 'asc']],
+            columnDefs: [
+                { orderable: false, targets: [2] } 
+            ],
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
             }
