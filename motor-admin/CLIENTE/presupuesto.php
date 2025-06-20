@@ -1,6 +1,7 @@
 <?php
 if (!isset($_SESSION)) {
     session_start();
+    $email=($_SESSION['email']);
 }
 // Verificar si la sesión está activa y el rol es 'Admin'
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
@@ -60,14 +61,19 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
 
         <form id="formPresupuesto" class="mx-auto container animate__animated animate__fadeInUp" style="max-width: 600px;">
             <div class="mb-3 text-start">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            name="nombre"
+            value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
+            <?= isset($_SESSION['nombre']) ? 'readonly' : 'required' ?>
+        >
+    </div>
 
-            <div class="mb-3 text-start">
-                <label for="email" class="form-label">Correo electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
+    
+     </div>
 
             <select id="servicio" name="servicio" class="form-select" required>
                 <option value="">-- Selecciona el servicio --</option>

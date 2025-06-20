@@ -1,12 +1,21 @@
 <?php
-include("../connection.php"); // Asegurate que este archivo tenga tu conexión a la BD
+session_start();
+include("../connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $connection->real_escape_string($_POST['nombre']);
-    $email = $connection->real_escape_string($_POST['email']);
+    // Si el usuario está logueado, toma nombre y email de la sesión
+    if (isset($_SESSION['nombre']) && isset($_SESSION['email'])) {
+        $nombre = $connection->real_escape_string($_SESSION['nombre']);
+        $email = $connection->real_escape_string($_SESSION['email']);
+    } else {
+        // Si no está logueado, toma los datos del formulario
+        $nombre = $connection->real_escape_string($_POST['nombre']);
+        $email = $connection->real_escape_string($_POST['email']);
+    }
+
     $servicio = $connection->real_escape_string($_POST['servicio']);
     $mensaje = $connection->real_escape_string($_POST['mensaje']);
-    
+
     $sql = "INSERT INTO consultas (nombre, email, servicio, mensaje) 
             VALUES ('$nombre', '$email', '$servicio', '$mensaje')";
 
