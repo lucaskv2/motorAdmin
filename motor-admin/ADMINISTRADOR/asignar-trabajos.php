@@ -118,55 +118,73 @@ if (!isset($_SESSION)) {
                 </tr>
             </thead>
             <tbody>
-                <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?>
-                    <tr data-trabajo-id="<?= $row['id'] ?>" data-estado="<?= $row['estado'] ?>" data-informe="<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>">
-                        <td><?= htmlspecialchars($row['nombre']) ?></td>
-                        <td><?= htmlspecialchars($row['patente']) ?></td>
-                        <td><?= htmlspecialchars($row['modelo']) ?></td>
-                        <td>
-                            <select class="form-select form-select-sm empleado-select" 
-                                    data-trabajo-id="<?= $row['id'] ?>" 
-                                    onchange="actualizarEmpleado(this)" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>
-                                <?php 
-                                mysqli_data_seek($employees, 0);
-                                while($e = mysqli_fetch_assoc($employees)): 
-                                ?>
-                                    <option value="<?= $e['id'] ?>" <?= $e['id'] == $row['id_empleado'] ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($e['nombre']) ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            </select>
-                        </td>
-                        <td><?= htmlspecialchars($row['descripcion']) ?></td>
-                        <td>
-                            <form method="POST" action="../php/actualizar-estado.php">
-                                <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
-                                <select name="estado" class="form-select form-select-sm estado-select" onchange="this.form.submit()" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>
-                                    <option value="Pendiente" <?= $row['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
-                                    <option value="En progreso" <?= $row['estado'] == 'En progreso' ? 'selected' : '' ?>>En progreso</option>
-                                    <option value="Finalizado" <?= $row['estado'] == 'Finalizado' ? 'selected' : '' ?>>Finalizado</option>
-                                </select>
-                            </form>
-                        </td>
-                        <td>
-                            <button 
-                                class="btn btn-info btn-sm" 
-                                type="button" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalInforme"
-                                onclick="abrirModalInforme(<?= $row['id'] ?>, `<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>`)">
-                                Ver
-                            </button>
-                            <div class="collapse" id="informe<?= $row['id'] ?>">
-                                <div class="card card-body mt-2"><?= nl2br(htmlspecialchars($row['informe'])) ?></div>
-                            </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="editarTrabajo(<?= $row['id'] ?>, `<?= htmlspecialchars($row['descripcion'], ENT_QUOTES) ?>`)" <?= $row['estado'] == 'Finalizado' ? 'disabled' : '' ?>>Editar</button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminarTrabajo(<?= $row['id'] ?>)">Eliminar</button>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
+                <?php while ($row = mysqli_fetch_assoc($resultUsuario)) : ?> 
+            <?php 
+                // Asignar clase según estado
+                $claseEstado = '';
+                switch ($row['estado']) {
+                    case 'Pendiente':
+                        $claseEstado = 'table-secondary'; // amarillo
+                        break;
+                    case 'En progreso':
+                        $claseEstado = 'table-info'; // azul claro
+                        break;
+                    case 'Finalizado':
+                        $claseEstado = 'table-success'; // verde
+                        break;
+                    default:
+                        $claseEstado = '';
+                }
+            ?>
+            <tr data-trabajo-id="<?= $row['id'] ?>" class="<?= $claseEstado ?>">
+                <td><?= htmlspecialchars($row['nombre']) ?></td>
+                <td><?= htmlspecialchars($row['patente']) ?></td>
+                <td><?= htmlspecialchars($row['modelo']) ?></td>
+                <td>
+                    <select class="form-select form-select-sm empleado-select" 
+                            data-trabajo-id="<?= $row['id'] ?>" 
+                            onchange="actualizarEmpleado(this)">
+                        <?php 
+                        mysqli_data_seek($employees, 0);
+                        while($e = mysqli_fetch_assoc($employees)): 
+                        ?>
+                            <option value="<?= $e['id'] ?>" <?= $e['id'] == $row['id_empleado'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($e['nombre']) ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </td>
+                <td><?= htmlspecialchars($row['descripcion']) ?></td>
+                <td>
+                    <form method="POST" action="../php/actualizar-estado.php">
+                        <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
+                        <select name="estado" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="Pendiente" <?= $row['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                            <option value="En progreso" <?= $row['estado'] == 'En progreso' ? 'selected' : '' ?>>En progreso</option>
+                            <option value="Finalizado" <?= $row['estado'] == 'Finalizado' ? 'selected' : '' ?>>Finalizado</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <button 
+                        class="btn btn-info btn-sm" 
+                        type="button" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#modalInforme"
+                        onclick="abrirModalInforme(<?= $row['id'] ?>, `<?= htmlspecialchars($row['informe'], ENT_QUOTES) ?>`)"
+                    >
+                        Ver
+                    </button>
+                    <div class="collapse" id="informe<?= $row['id'] ?>">
+                        <div class="card card-body mt-2"><?= nl2br(htmlspecialchars($row['informe'])) ?></div>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm" onclick="editarTrabajo(<?= $row['id'] ?>, `<?= htmlspecialchars($row['descripcion'], ENT_QUOTES) ?>`)">Editar</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminarTrabajo(<?= $row['id'] ?>)">Eliminar</button>
+                </td>
+            </tr>
+        <?php endwhile; ?>
             </tbody>
         </table>
     </div>

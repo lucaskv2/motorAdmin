@@ -140,6 +140,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                         <th>Rol</th>
                         <th>Fecha de Registro</th>
                         <th></th>
+                        <th>Actualizar rol</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,6 +159,19 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                                         onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>', 'user')">
                                     Eliminar
                                 </button>
+                            </td>
+                            <td>
+                                <div class="form-check form-switch">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    id="checkbox-<?= $row['id'] ?>" 
+                                    data-id="<?= $row['id'] ?>"
+                                    <?= ($row['rol'] === 'Admin') ? 'checked' : '' ?>
+                                >
+                                <label class="form-check-label" for="checkbox-<?= $row['id'] ?>">Admin</label>
+                                </div>
+
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -277,6 +291,48 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
             alert('Error al eliminar');
         });
     }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.form-check-input').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+      const userId = this.dataset.id;
+      if (!userId) {
+        alert('ID de usuario no definido');
+        this.checked = !this.checked; // revertir cambio
+        return;
+      }
+      const nuevoRol = this.checked ? 'Admin' : 'Cliente';
+
+      // Guardar estado anterior para revertir si hay error
+      const estadoAnterior = !this.checked;
+
+      fetch('../php/actualizar-rol.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `id=${encodeURIComponent(userId)}&rol=${encodeURIComponent(nuevoRol)}`
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.estado === 'success') {
+          // Recargar la página para reflejar cambios
+          location.reload();
+        } else {
+          alert('Error al actualizar el rol');
+          this.checked = estadoAnterior; // revertir checkbox
+        }
+      })
+      .catch(error => {
+        alert('Error en la conexión');
+        this.checked = estadoAnterior; // revertir checkbox
+      });
+            });
+        });
+    });
+
     </script>
 </body>
 </html>
