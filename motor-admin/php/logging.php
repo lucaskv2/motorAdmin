@@ -1,4 +1,3 @@
- 
 <?php
 session_start(); // Debe ser lo primero
 require_once("../connection.php");
@@ -45,7 +44,27 @@ if ($user_data && password_verify($password, $user_data['contrasenia'])) {
     }
     exit;
 } else {
-    die(json_encode(["error" => "Usuario o contraseña incorrectos"]));
+    // Mostrar mensaje de error en HTML centrado con botón de volver
+    echo '<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error de inicio de sesión</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f8f9fa; }
+            .error-container { background: #fff; padding: 2rem 2.5rem; border-radius: 1rem; box-shadow: 0 2px 16px rgba(0,0,0,0.08); text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class="error-container">
+            <h2 class="mb-4 text-danger">Usuario o Contraseña incorrectos</h2>
+            <a href="../PAGES/index.php?login=1" class="btn btn-success">Volver</a>
+        </div>
+    </body>
+    </html>';
+    exit;
 }
 ?>
 /*/header('Content-Type: application/json');
