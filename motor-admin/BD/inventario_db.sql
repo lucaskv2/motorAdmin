@@ -79,3 +79,38 @@ CREATE TABLE mensajes_respondidos (
   respuesta TEXT,
   fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE empleado
+ADD valor_hora DECIMAL(10,2) NOT NULL DEFAULT 0.00;
+
+ALTER TABLE servicios
+ADD costo_base DECIMAL(10,2) NOT NULL DEFAULT 0.00;
+
+CREATE TABLE facturas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_trabajo INT NOT NULL,
+    fecha_emision TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subtotal DECIMAL(10,2) NOT NULL,
+    iva DECIMAL(10,2) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    estado_pago ENUM('Pendiente', 'Pagado') DEFAULT 'Pendiente',
+    archivo_pdf VARCHAR(255),
+    FOREIGN KEY (id_trabajo) REFERENCES trabajos(id)
+);
+
+CREATE TABLE factura_productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_factura) REFERENCES facturas(id),
+    FOREIGN KEY (id_producto) REFERENCES stock(id)
+);
+
+ALTER TABLE trabajos
+ADD horas_trabajadas DECIMAL(5,2) DEFAULT 0.00;
+
+ALTER TABLE trabajos
+ADD id_servicio INT,
+ADD FOREIGN KEY (id_servicio) REFERENCES servicios(id);

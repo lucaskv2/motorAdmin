@@ -84,9 +84,13 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                     <label for="especialidad" class="form-label">Especialidad</label>
                     <input type="text" class="form-control" id="especialidad" name="especialidad" required>
                     </div>
+                    <div class="col-md-6">
+                        <label for="valor_hora" class="form-label">Valor por hora ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="valor_hora" name="valor_hora" required>
+                    </div>
 
                     <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Registrar empleado</button>
+                        <button type="submit" class="btn btn-primary">Registrar empleado</button>
                     </div>
                 </form>
             </div>
@@ -101,6 +105,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                         <th>Teléfono</th>
                         <th>Dirección</th>
                         <th>Especialidad</th>
+                        <th>Valor por hora</th>
                         <th>Fecha de Registro</th>
                         <th></th>
                     </tr>
@@ -115,6 +120,14 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                             <td><?= htmlspecialchars($row['telefono']) ?></td>
                             <td><?= htmlspecialchars($row['direccion']) ?></td>
                             <td><?= htmlspecialchars($row['especialidad']) ?></td>
+                            <td>
+                                <form method="POST" action="../php/actualizar_valor_hora.php" class="d-flex">
+                                    <input type="hidden" name="id_empleado" value="<?= $row['id'] ?>">
+                                    <input type="number" step="0.01" name="valor_hora" class="form-control form-control-sm me-1" 
+                                        value="<?= $row['valor_hora'] ?>" style="width: 90px;">
+                                    <button type="submit" class="btn btn-sm btn-success">💾</button>
+                                </form>
+                            </td>
                             <td><?= htmlspecialchars($row['fecha']) ?></td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm"

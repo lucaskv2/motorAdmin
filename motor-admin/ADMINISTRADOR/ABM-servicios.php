@@ -38,6 +38,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                 <tr>
                     <th>ID</th>
                     <th>Nombre del servicio</th>
+                    <th>Costo base ($)</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -46,11 +47,13 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                     <tr>
                         <td><?= $row['id'] ?></td>
                         <td><?= $row['nombre'] ?></td>
+                        <td>$<?= number_format($row['costo_base'], 2, ',', '.') ?></td>
                         <td>
                             <button 
                                 class="btn btn-warning btn-sm btn-editar" 
                                 data-id="<?= $row['id'] ?>" 
                                 data-nombre="<?= htmlspecialchars($row['nombre']) ?>" 
+                                data-costo="<?= $row['costo_base'] ?>" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#editarModal">
                                 Editar
@@ -81,6 +84,10 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                 <div class="mb-3">
                     <label for="editarNombre" class="form-label">Nombre del servicio</label>
                     <input type="text" class="form-control" name="nombre" id="editarNombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="editarCosto" class="form-label">Costo base ($)</label>
+                    <input type="number" class="form-control" step="0.01" name="costo_base" id="editarCosto" required>
                 </div>
                 </div>
                 <div class="modal-footer">
@@ -136,8 +143,10 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         $(document).on("click", ".btn-editar", function () {
             const id = $(this).data("id");
             const nombre = $(this).data("nombre");
+            const costo = $(this).data("costo");
             $("#editarId").val(id);
             $("#editarNombre").val(nombre);
+            $("#editarCosto").val(costo);
         });
     </script>
     <script>

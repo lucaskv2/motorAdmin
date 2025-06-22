@@ -35,13 +35,17 @@ if (!isset($_SESSION)) {
                 empleado.nombre AS nombre_empleado,
                 trabajos.descripcion,
                 trabajos.estado,
-                trabajos.informe
+                trabajos.informe,
+                servicios.nombre AS nombre_servicio,
+                trabajos.horas_estimadas
             FROM trabajos
             JOIN usuarios ON trabajos.id_usuario = usuarios.id
             JOIN empleado ON trabajos.id_empleado = empleado.id
+            LEFT JOIN servicios ON trabajos.id_servicio = servicios.id
             ORDER BY trabajos.id DESC
         ";
         $resultUsuario = mysqli_query($connection, $queryTrabajos);
+        $servicios = mysqli_query($connection, "SELECT id, nombre FROM servicios");
 
         $trabajosActivos = mysqli_query($connection, "
             SELECT trabajos.id, trabajos.id_usuario, trabajos.id_empleado, trabajos.estado, usuarios.patente
@@ -95,12 +99,25 @@ if (!isset($_SESSION)) {
                 <?php endwhile; ?>
             </select>
             </div>
-
             <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción del Trabajo</label>
-            <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
+                <label for="servicio" class="form-label">Servicio</label>
+                <select id="servicio" name="id_servicio" class="form-select select2" required>
+                    <option value="">– Elegí un servicio –</option>
+                    <?php while($s = mysqli_fetch_assoc($servicios)): ?>
+                    <option value="<?= $s['id'] ?>"><?= htmlspecialchars($s['nombre']) ?></option>
+                    <?php endwhile; ?>
+                </select>
             </div>
-
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción del Trabajo</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="horas_estimadas" class="form-label">Horas Estimadas</label>
+                    <input type="number" name="horas_estimadas" step="0.1" min="0" class="form-control" required>
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
         </form>
 
@@ -111,7 +128,9 @@ if (!isset($_SESSION)) {
                     <th>Patente</th>
                     <th>Modelo</th>
                     <th>Empleado Asignado</th>
+                    <th>Servicio</th>
                     <th>Descripción</th>
+                    <th>Horas Estimadas</th>
                     <th>Estado</th>
                     <th>Informe</th>
                     <th>Acciones</th>
@@ -154,7 +173,9 @@ if (!isset($_SESSION)) {
                         <?php endwhile; ?>
                     </select>
                 </td>
+                <td><?= htmlspecialchars($row['nombre_servicio']) ?></td>
                 <td><?= htmlspecialchars($row['descripcion']) ?></td>
+                <td><?= htmlspecialchars($row['horas_estimadas']) ?? '-' ?></td>
                 <td>
                     <form method="POST" action="../php/actualizar-estado.php">
                         <input type="hidden" name="id_trabajo" value="<?= $row['id'] ?>">
