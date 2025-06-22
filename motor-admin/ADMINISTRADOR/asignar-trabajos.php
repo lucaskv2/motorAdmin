@@ -102,7 +102,6 @@ if (!isset($_SESSION)) {
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
-            <button id="btnTrabajosRealizados" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#modalTrabajosFinalizados">Trabajos Realizados</button>
         </form>
 
         <table id="tabla-asignar-trabajo" class="table table-bordered table-hover">

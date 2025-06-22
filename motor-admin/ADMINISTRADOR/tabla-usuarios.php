@@ -277,22 +277,30 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+            }
+            return response.json();
+        })
         .then(data => {
             // Cerrar el modal de confirmación
             const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
             deleteModal.hide();
 
-            // Mostrar el modal de éxito
-            document.getElementById('successMessage').textContent = isUser ? 
-                "El usuario ha sido eliminado correctamente" : 
-                data.message;
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
+            if (data.success) {
+                // Mostrar el modal de éxito
+                document.getElementById('successMessage').textContent = data.message;
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            } else {
+                // Mostrar error específico del servidor
+                alert('Error: ' + data.message);
+            }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error al eliminar');
+            alert('Error al eliminar: ' + error.message);
         });
     }
     </script>
