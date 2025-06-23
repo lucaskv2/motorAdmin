@@ -109,8 +109,17 @@ CREATE TABLE factura_productos (
 );
 
 ALTER TABLE trabajos
-ADD horas_trabajadas DECIMAL(5,2) DEFAULT 0.00;
+ADD horas_estimadas DECIMAL(5,2) DEFAULT 0.00;
 
 ALTER TABLE trabajos
 ADD id_servicio INT,
 ADD FOREIGN KEY (id_servicio) REFERENCES servicios(id);
+
+CREATE TABLE productos_usados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    FOREIGN KEY (id_factura) REFERENCES facturas(id),
+    FOREIGN KEY (id_producto) REFERENCES productos(id)
+);

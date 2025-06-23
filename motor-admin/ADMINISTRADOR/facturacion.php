@@ -112,10 +112,13 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                     else {
                         echo "<span class='badge bg-success'>Pagado</span>";
                     }
-                    echo "</td>";
-
-                    echo "<td><a href='../facturas/{$row['archivo_pdf']}' target='_blank'>Ver PDF</a></td>
-                        </tr>";
+                    echo "<td>";
+                    if (!$row['archivo_pdf']) {
+                        echo "<a href='../php/facturacion/generar-pdf.php?id={$row['id']}' class='btn btn-sm btn-outline-primary'>Generar PDF</a>";
+                    } else {
+                        echo "<a href='../facturas/{$row['archivo_pdf']}' target='_blank'>Ver PDF</a>";
+                    }
+                    echo "</td></tr>";
                 }
                 ?>
             </tbody>
