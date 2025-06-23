@@ -118,8 +118,8 @@ ADD FOREIGN KEY (id_servicio) REFERENCES servicios(id);
 CREATE TABLE productos_usados (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_factura INT NOT NULL,
-    id_producto INT NOT NULL,
+    id_stock INT NOT NULL,
     cantidad INT NOT NULL,
     FOREIGN KEY (id_factura) REFERENCES facturas(id),
-    FOREIGN KEY (id_producto) REFERENCES productos(id)
+    FOREIGN KEY (id_stock) REFERENCES stock(id)
 );
