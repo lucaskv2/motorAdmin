@@ -94,6 +94,16 @@ if (!isset($_SESSION)) {
               <i class="bi bi-award-fill me-2"></i>ABM Servicios
           </a>
       </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/facturacion.php" class="sidebar-link text-dark">
+              <i class="bi bi-award-fill me-2"></i>Facturas
+          </a>
+      </li>
+      <li class="list-group-item border-0">
+          <a href="../ADMINISTRADOR/generar-factura.php" class="sidebar-link text-dark">
+              <i class="bi bi-award-fill me-2"></i>Generar Facturas
+          </a>
+      </li>
     </ul>
 
     <!-- Botón Logout -->
