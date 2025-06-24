@@ -46,12 +46,12 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         <div class="mb-3">
             <label for="tablaSelect" class="form-label fw-bold">Seleccionar tabla:</label>
             <select class="form-select" id="tablaSelect">
-                <option value="usuarios">Usuarios</option>
-                <option value="empleados">Empleados</option>
+                <option value="usuarios" <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? '' : 'selected' ?>>Usuarios</option>
+                <option value="empleados" <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? 'selected' : '' ?>>Empleados</option>
             </select>
         </div>
 
-        <div id="tabla-empleados" class="tabla-content d-none">
+        <div id="tabla-empleados" class="tabla-content <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? '' : 'd-none' ?>">
             <h4 class="mb-3">Registrar nuevo empleado</h4>
             <div class="container my-4">
                 <form method="POST" action="../php/register-empleado.php" class="row g-3">
@@ -140,7 +140,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
                 </tbody>
             </table>
         </div>
-        <div id="tabla-usuarios" class="table-responsive tabla-content">
+        <div id="tabla-usuarios" class="table-responsive tabla-content <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? 'd-none' : '' ?>">
             <table id="tabla-usuario" class="table table-bordered table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
