@@ -86,7 +86,7 @@ if (!isset($_SESSION)) {
       </li>
       <li class="list-group-item border-0">
           <a href="../ADMINISTRADOR/solicitud-presupuesto.php" class="sidebar-link text-dark">
-              <i class="bi bi-receipt me-2"></i>Solicitudes de Presupuesto
+              <i class="bi bi-receipt me-2"></i>Tabla de Consultas y Presupuestos
           </a>
       </li>
       <li class="list-group-item border-0">
