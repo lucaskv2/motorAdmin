@@ -27,28 +27,25 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
             <div class="col-md-6">
                 <input
                     type="text"
-                    class="form-control"
-                    id="nombre"
+                    class="form-control text-dark bg-white border-secondary" id="nombre"
                     name="nombre"
-                    value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
+                    placeholder="Nombre" value="<?= isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : '' ?>"
                     <?= isset($_SESSION['nombre']) ? 'readonly' : 'required' ?>
                 >
             </div>
             <div class="col-md-6">
                 <input
                     type="email"
-                    class="form-control"
-                    id="email"
+                    class="form-control text-dark bg-white border-secondary" id="email"
                     name="email"
-                    value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>"
+                    placeholder="Email" value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '' ?>"
                     <?= isset($_SESSION['email']) ? 'readonly' : 'required' ?>
                 >
             </div>
             <div class="col-md-6">
                 <input
                     type="tel"
-                    class="form-control"
-                    id="telefono"
+                    class="form-control text-dark bg-white border-secondary" id="telefono"
                     name="telefono"
                     placeholder="Teléfono"
                     value="<?= isset($_SESSION['telefono']) ? htmlspecialchars($_SESSION['telefono']) : '' ?>"
@@ -56,13 +53,22 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
                 >
             </div>
             <div class="col-md-6">
-                <input name="Asunto" type="text" class="form-control" placeholder="Asunto">
+                <input
+                    name="Asunto"
+                    type="text"
+                    class="form-control text-dark bg-white border-secondary" placeholder="Asunto"
+                >
             </div>
             <div class="col-12">
-                <textarea name="Mensaje" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <textarea
+                    name="Mensaje"
+                    class="form-control text-dark bg-white border-secondary" rows="5"
+                    placeholder="Escribe tu mensaje aquí..."
+                    required
+                ></textarea>
             </div>
             <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary px-5">Enviar</button>
+                <button type="submit" class="btn btn-primary btn-lg shadow-sm px-5">Enviar</button>
             </div>
         </form>
     </section>

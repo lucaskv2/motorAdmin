@@ -13,6 +13,7 @@ if (!isset($_SESSION)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handsontable - Hoja de Cálculo Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -63,63 +64,67 @@ if (!isset($_SESSION)) {
     
     
     <div class="container my-5">
-        <h2>Asignar Nuevo Trabajo</h2>
-        <form action="../php/guardar-trabajo.php" method="POST"  class="my-5">
-            <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select id="cliente" name="id_usuario" class="form-select select2" required>
-                <option value="">– Seleccioná cliente –</option>
-                <?php while($c = mysqli_fetch_assoc($clients)): ?>
-                <option value="<?= $c['id'] ?>"
-                    data-patente="<?= htmlspecialchars($c['patente']) ?>"
-                    data-modelo="<?= htmlspecialchars($c['modelo']) ?>">
-                    <?= htmlspecialchars($c['nombre']) ?>
-                </option>
-                <?php endwhile; ?>
-            </select>
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0"><i class="fas fa-briefcase me-2"></i> Asignar Nuevo Trabajo</h4>
             </div>
+            <div class="card-body">
+                <form action="../php/guardar-trabajo.php" method="POST" class="row g-4">
 
-            <div class="row">
-            <div class="mb-3 col">
-                <label class="form-label">Patente</label>
-                <input id="patente" type="text" class="form-control" readonly>
-            </div>
-            <div class="mb-3 col">
-                <label class="form-label">Modelo</label>
-                <input id="modelo" type="text" class="form-control" readonly>
-            </div>
-            </div>
+                    <div class="col-12"> <label for="cliente" class="form-label">Cliente</label>
+                        <select id="cliente" name="id_usuario" class="form-select select2" required>
+                            <option value="">– Seleccioná cliente –</option>
+                            <?php while($c = mysqli_fetch_assoc($clients)): ?>
+                            <option value="<?= $c['id'] ?>"
+                                data-patente="<?= htmlspecialchars($c['patente']) ?>"
+                                data-modelo="<?= htmlspecialchars($c['modelo']) ?>">
+                                <?= htmlspecialchars($c['nombre']) ?>
+                            </option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
 
-            <div class="mb-3">
-            <label for="empleado" class="form-label">Empleado Asignado</label>
-            <select id="empleado" name="id_empleado" class="form-select select2" required>
-                <option value="">– Elegí empleado –</option>
-                <?php while($e = mysqli_fetch_assoc($employees)): ?>
-                <option value="<?= $e['id'] ?>"><?= htmlspecialchars($e['nombre']) ?></option>
-                <?php endwhile; ?>
-            </select>
+                    <div class="col-md-6">
+                        <label class="form-label">Patente</label>
+                        <input id="patente" type="text" class="form-control" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Modelo</label>
+                        <input id="modelo" type="text" class="form-control" readonly>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="empleado" class="form-label">Empleado Asignado</label>
+                        <select id="empleado" name="id_empleado" class="form-select select2" required>
+                            <option value="">– Elegí empleado –</option>
+                            <?php while($e = mysqli_fetch_assoc($employees)): ?>
+                            <option value="<?= $e['id'] ?>"><?= htmlspecialchars($e['nombre']) ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="servicio" class="form-label">Servicio</label>
+                        <select id="servicio" name="id_servicio" class="form-select select2" required>
+                            <option value="">– Elegí un servicio –</option>
+                            <?php while($s = mysqli_fetch_assoc($servicios)): ?>
+                            <option value="<?= $s['id'] ?>"><?= htmlspecialchars($s['nombre']) ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="descripcion" class="form-label">Descripción del Trabajo</label>
+                        <textarea name="descripcion" id="descripcion" class="form-control" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="col-md-6"> <label for="horas_estimadas" class="form-label">Horas Estimadas</label>
+                        <input type="number" name="horas_estimadas" step="0.1" min="0" class="form-control" required>
+                    </div>
+                    <div class="col-12 text-end"> <button type="submit" class="btn btn-primary btn-lg mt-3"> <i class="fas fa-save me-2"></i> Guardar Trabajo
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="servicio" class="form-label">Servicio</label>
-                <select id="servicio" name="id_servicio" class="form-select select2" required>
-                    <option value="">– Elegí un servicio –</option>
-                    <?php while($s = mysqli_fetch_assoc($servicios)): ?>
-                    <option value="<?= $s['id'] ?>"><?= htmlspecialchars($s['nombre']) ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripción del Trabajo</label>
-                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
-            </div>
-            <div class="row">
-                <div class="mb-3 col">
-                    <label for="horas_estimadas" class="form-label">Horas Estimadas</label>
-                    <input type="number" name="horas_estimadas" step="0.1" min="0" class="form-control" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Guardar Trabajo</button>
-        </form>
+        </div>
 
         <table id="tabla-asignar-trabajo" class="table table-bordered table-hover">
             <thead class="table-dark">
@@ -603,7 +608,7 @@ if (!isset($_SESSION)) {
             var table = $('#tabla-asignar-trabajo').DataTable({
                 order: [[1, 'asc']],
                 columnDefs: [
-                    { orderable: false, targets: [3, 5, 6, 7] } 
+                    { orderable: false, targets: [3, 7, 8, 9] } 
                 ],
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'

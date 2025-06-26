@@ -130,7 +130,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
             $('#tablaServicios').DataTable({
             order: [[1, 'asc']],
             columnDefs: [
-                { orderable: false, targets: [2] } 
+                { orderable: false, targets: [3] } 
             ],
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'

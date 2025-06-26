@@ -1,5 +1,15 @@
 
 <style>
+  html, body {
+    height: 100%; /* Asegura que html y body ocupen el 100% de la altura de la ventana */
+    margin: 0; /* Elimina márgenes por defecto del body */
+  }
+
+  body {
+      display: flex; /* Habilita Flexbox en el body */
+      flex-direction: column; /* Organiza los elementos hijos en una columna vertical */
+  }
+  
   .footer {
     background-color:#1b263b;
     color: #f8f9fa;

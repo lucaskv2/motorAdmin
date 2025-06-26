@@ -123,3 +123,8 @@ CREATE TABLE productos_usados (
     FOREIGN KEY (id_factura) REFERENCES facturas(id),
     FOREIGN KEY (id_stock) REFERENCES stock(id)
 );
+
+CREATE TABLE especialidades(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL
+);

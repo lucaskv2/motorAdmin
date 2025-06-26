@@ -40,6 +40,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
             <a class="nav-link" href="../CLIENTE/presupuesto.php">Presupuesto</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="../CLIENTE/mis-facturas.php">Mis Facturas</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="../CLIENTE/contacto.php">Contáctanos</a>
           </li>
         </ul>

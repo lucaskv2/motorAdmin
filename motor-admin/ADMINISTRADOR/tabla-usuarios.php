@@ -13,6 +13,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handsontable - Hoja de Cálculo Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 </head>
@@ -52,47 +53,53 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         </div>
 
         <div id="tabla-empleados" class="tabla-content <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? '' : 'd-none' ?>">
-            <h4 class="mb-3">Registrar nuevo empleado</h4>
-            <div class="container my-4">
-                <form method="POST" action="../php/register-empleado.php" class="row g-3">
-                    <div class="col-md-6">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i> Registrar Nuevo Empleado</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="../php/register-empleado.php" class="row g-4">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
 
-                    <div class="col-md-6">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
 
-                    <div class="col-md-4">
-                    <label for="dni" class="form-label">DNI</label>
-                    <input type="text" class="form-control" id="dni" name="dni" required>
-                    </div>
+                        <div class="col-md-4">
+                            <label for="dni" class="form-label">DNI</label>
+                            <input type="text" class="form-control" id="dni" name="dni" required>
+                        </div>
 
-                    <div class="col-md-4">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" required>
-                    </div>
+                        <div class="col-md-4">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required>
+                        </div>
 
-                    <div class="col-md-4">
-                    <label for="direccion" class="form-label">Dirección</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion" required>
-                    </div>
+                        <div class="col-md-4">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        </div>
 
-                    <div class="col-md-6">
-                    <label for="especialidad" class="form-label">Especialidad</label>
-                    <input type="text" class="form-control" id="especialidad" name="especialidad" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="valor_hora" class="form-label">Valor por hora ($)</label>
-                        <input type="number" step="0.01" class="form-control" id="valor_hora" name="valor_hora" required>
-                    </div>
+                        <div class="col-md-6">
+                            <label for="especialidad" class="form-label">Especialidad</label>
+                            <input type="text" class="form-control" id="especialidad" name="especialidad" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="valor_hora" class="form-label">Valor por hora ($)</label>
+                            <input type="number" step="0.01" class="form-control" id="valor_hora" name="valor_hora" required>
+                        </div>
 
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Registrar empleado</button>
-                    </div>
-                </form>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                <i class="fas fa-user-plus me-2"></i> Registrar Empleado
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
             
             <table class="table table-bordered table-hover align-middle" id="tabla-empleado">
@@ -141,6 +148,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
             </table>
         </div>
         <div id="tabla-usuarios" class="table-responsive tabla-content <?= (isset($_GET['tabla']) && $_GET['tabla'] === 'empleados') ? 'd-none' : '' ?>">
+            <h4 class="mb-3">Usuarios Registrados</h4>
             <table id="tabla-usuario" class="table table-bordered table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
@@ -253,7 +261,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
             $('#tabla-empleado').DataTable({
             order: [[1, 'asc']],
             columnDefs: [
-                { orderable: false, targets: [8] } 
+                { orderable: false, targets: [8, 9] } 
             ],
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'

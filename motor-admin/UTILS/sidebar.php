@@ -36,19 +36,23 @@ if (!isset($_SESSION)) {
   .list-group-item {
     background-color: transparent;
   }
+
+  
 </style>
 
 </head>
 <body>
 
 <!-- Botón para abrir el sidebar -->
-<nav class="navbar bg-dark text-white">
+<nav class="navbar navbar-dark bg-dark shadow sticky-top">
   <div class="container-fluid">
-    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar" aria-controls="adminSidebar">
-      ☰ Menú
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar" aria-controls="adminSidebar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> 
     </button>
-    <span class="navbar-brand mb-0 h1 text-white">Panel de Administración</span>
-  </div>
+      <a class="navbar-brand me-auto ms-3" href="#">
+          Panel de Administración
+      </a>
+    </div>
 </nav>
 
 <!-- Sidebar Offcanvas -->
@@ -102,11 +106,6 @@ if (!isset($_SESSION)) {
       <li class="list-group-item border-0">
           <a href="../ADMINISTRADOR/facturacion.php" class="sidebar-link text-dark">
               <i class="bi bi-award-fill me-2"></i>Facturas
-          </a>
-      </li>
-      <li class="list-group-item border-0">
-          <a href="../ADMINISTRADOR/generar-factura.php" class="sidebar-link text-dark">
-              <i class="bi bi-award-fill me-2"></i>Generar Facturas
           </a>
       </li>
     </ul>

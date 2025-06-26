@@ -30,6 +30,8 @@ if ($user_data && password_verify($password, $user_data['contrasenia'])) {
     $_SESSION['telefono'] = $user_data['telefono'];
     $_SESSION['email'] = $user_data['email'];
     $_SESSION['rol'] = $user_data['rol'];
+    $_SESSION['valid'] = $user_data['rol'];
+    $_SESSION['id'] = $user_data['id'];
 
     switch($user_data['rol']) {
         case 'Cliente':

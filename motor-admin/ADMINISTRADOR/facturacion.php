@@ -175,7 +175,14 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#tablaFacturas').DataTable();
+            $('#tablaFacturas').DataTable({
+                columnDefs: [
+                { orderable: false, targets: [6, 7] } 
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
         });
     </script>
 </body>
