@@ -2,8 +2,8 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-// Verificar si la sesión está activa y el rol es 'Admin'
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
+// Verificar si la sesión está activa y el rol es 'Cliente' o 'Empleado'
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] !== 'Cliente' && $_SESSION['rol'] !== 'Empleado')) {
     header("Location: ../PAGES/index.php");
     exit();
 }
@@ -46,8 +46,11 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Cliente') {
             <a class="nav-link" href="../CLIENTE/contacto.php">Contáctanos</a>
           </li>
         </ul>
-        <div class="d-flex">
-          <a href="../php/logout.php" class="btn btn-outline-danger w-100">
+        <div class="d-flex align-items-center">
+          <?php if (isset($_SESSION['nombre'])): ?>
+            <span class="me-3 text-dark fw-bold">¡Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!</span>
+          <?php endif; ?>
+          <a href="../php/logout.php" class="btn btn-outline-danger">
             <i class="bi bi-box-arrow-right"></i> Logout
           </a>
         </div>

@@ -52,6 +52,11 @@ if (!isset($_SESSION)) {
       <a class="navbar-brand me-auto ms-3" href="#">
           Panel de Administración
       </a>
+      <?php if (isset($_SESSION['nombre'])): ?>
+        <span class="navbar-text text-light me-3">
+          ¡Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!
+        </span>
+      <?php endif; ?>
     </div>
 </nav>
 
