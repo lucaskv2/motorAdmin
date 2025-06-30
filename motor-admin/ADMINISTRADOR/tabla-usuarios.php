@@ -248,7 +248,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
         tablaActiva.classList.remove('d-none');
     });
         $('#tabla-usuario').DataTable({
-            order: [[1, 'asc']], 
+            order: [[0, 'desc']], 
             columnDefs: [
                 { orderable: false, targets: [8, 9] } 
             ],
@@ -259,7 +259,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
 
         $(document).ready(function () {
             $('#tabla-empleado').DataTable({
-            order: [[1, 'asc']],
+            order: [[0, 'desc']],
             columnDefs: [
                 { orderable: false, targets: [8, 9] } 
             ],

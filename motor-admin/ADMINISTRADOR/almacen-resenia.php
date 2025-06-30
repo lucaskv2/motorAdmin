@@ -29,7 +29,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
     $result = mysqli_query($connection,$sql);
     
     echo'<div class="container my-5">
-        <h2 class="text-center mb-4">Contactos</h2>';
+        <h2 class="text-center mb-4">Responder Consultas</h2>';
     
     // Mostrar mensajes de éxito o error
     if (isset($_GET['success']) && $_GET['success'] == '1') {
@@ -131,7 +131,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Admin') {
 <script>
     $(document).ready(function () {
         $('#tabla-contactos').DataTable({
-        order: [[1, 'asc']],
+        order: [[5, 'desc']],
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
         }
