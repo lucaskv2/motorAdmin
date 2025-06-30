@@ -271,7 +271,7 @@ JOIN especialidades esp ON e.id_especialidad = esp.id
         tablaActiva.classList.remove('d-none');
     });
         $('#tabla-usuario').DataTable({
-            order: [[1, 'asc']], 
+            order: [[0, 'desc']], 
             columnDefs: [
                 { orderable: false, targets: [8, 9] } 
             ],
@@ -282,7 +282,7 @@ JOIN especialidades esp ON e.id_especialidad = esp.id
 
         $(document).ready(function () {
             $('#tabla-empleado').DataTable({
-            order: [[1, 'asc']],
+            order: [[0, 'desc']],
             columnDefs: [
                 { orderable: false, targets: [8, 9] } 
             ],
