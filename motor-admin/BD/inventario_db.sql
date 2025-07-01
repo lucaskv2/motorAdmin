@@ -49,23 +49,24 @@ CREATE TABLE stock (
 
 -- Crear primero la tabla de especialidades
 CREATE TABLE especialidades(
-id INT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(30) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL
 );
 
 -- Luego crear la tabla de empleados
 CREATE TABLE empleado (
-id INT AUTO_INCREMENT PRIMARY KEY,
-nombre VARCHAR(100) NOT NULL,
-email VARCHAR(100) NOT NULL UNIQUE,
-dni VARCHAR(20) NOT NULL UNIQUE,
-telefono VARCHAR(20) NOT NULL,
-direccion VARCHAR(40) NOT NULL,
-id_especialidad INT NOT NULL,
-fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-FOREIGN KEY (id_especialidad) REFERENCES especialidades(id)
-ON DELETE RESTRICT ON UPDATE CASCADE,
-INDEX idx_id_especialidad (id_especialidad)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NOT NULL,
+    direccion VARCHAR(40) NOT NULL,
+    id_especialidad INT NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valor_hora DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    FOREIGN KEY (id_especialidad) REFERENCES especialidades(id)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+    INDEX idx_id_especialidad (id_especialidad)
 );
 
 CREATE TABLE trabajos (
