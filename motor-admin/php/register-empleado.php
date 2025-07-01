@@ -11,13 +11,13 @@ $especialidad = $_POST['id_especialidad'];
 $valor_hora = $_POST['valor_hora'];
 
 // Usar prepared statements
-$stmt = $connection->prepare("INSERT INTO empleado (nombre, email, dni, telefono, direccion, id_especialidad) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt = $connection->prepare("INSERT INTO empleado (nombre, email, dni, telefono, direccion, id_especialidad, valor_hora) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
 if (!$stmt) {
     die("Error en la preparación: " . $connection->error);
 }
 
-$stmt->bind_param("sssssi", $nombre, $email, $dni, $telefono, $direccion, $especialidad);
+$stmt->bind_param("sssssid", $nombre, $email, $dni, $telefono, $direccion, $especialidad, $valor_hora);
 
 if ($stmt->execute()) {
     header("Location: ../../motor-admin/ADMINISTRADOR/tabla-usuarios.php?tabla=empleados");
