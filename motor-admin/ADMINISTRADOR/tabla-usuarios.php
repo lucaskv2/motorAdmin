@@ -134,8 +134,8 @@ JOIN especialidades esp ON e.id_especialidad = esp.id
                         <th>Teléfono</th>
                         <th>Dirección</th>
                         <th>Especialidad</th>
-                        <th>Valor por hora</th>
                         <th>Fecha de Registro</th>
+                        <th>Valor por hora</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -149,7 +149,7 @@ JOIN especialidades esp ON e.id_especialidad = esp.id
                             <td><?= htmlspecialchars($row['telefono']) ?></td>
                             <td><?= htmlspecialchars($row['direccion']) ?></td>
                             <td><?= htmlspecialchars($row['especialidad']) ?></td>
-                            <td><?= htmlspecialchars($row['valor_hora']) ?></td>
+                            <td><?= htmlspecialchars($row['fecha']) ?></td>
                             <td>
                                 <form method="POST" action="../php/actualizar_valor_hora.php" class="d-flex">
                                     <input type="hidden" name="id_empleado" value="<?= $row['id'] ?>">
@@ -158,7 +158,6 @@ JOIN especialidades esp ON e.id_especialidad = esp.id
                                     <button type="submit" class="btn btn-sm btn-success">💾</button>
                                 </form>
                             </td>
-                            <td><?= htmlspecialchars($row['fecha']) ?></td>
                             <td>
                                 <button type="button" class="btn btn-danger btn-sm"
                                         onclick="confirmDelete(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>', 'empleado')">
