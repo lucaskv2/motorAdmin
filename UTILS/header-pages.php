@@ -13,7 +13,7 @@ session_start();
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-      <a class="navbar-brand" href="../PAGES/inicio.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
+      <a class="navbar-brand" href="../PAGES/index.php"><img src="../images/motorAdmin-logo.png" alt="Logo" style="width: 50px; height: auto;"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,15 +21,20 @@ session_start();
       <div class="collapse navbar-collapse bg-light" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
+<<<<<<< HEAD:UTILS/header-pages.php
             <a class="nav-link" href="../PAGES/inicio.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/turnos.php">Turnos</a>
+=======
+            <a class="nav-link" href="../PAGES/index.php">Inicio</a>
+>>>>>>> main:motor-admin/UTILS/header-pages.php
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/servicios.php">Servicios</a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD:UTILS/header-pages.php
             <a class="nav-link" href="../PAGES/resenia.php">Reseña</a>
           </li>
           <li class="nav-item">
@@ -43,10 +48,13 @@ session_start();
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../PAGES/almacen-resenia.php">Almacén de Contactos</a>
+=======
+            <a class="nav-link" href="../PAGES/contacto.php">Contáctanos</a>
+>>>>>>> main:motor-admin/UTILS/header-pages.php
           </li>
         </ul>
         <div class="d-flex">
-          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar</button>
         </div>
       </div>
     </nav>
@@ -63,7 +71,7 @@ session_start();
           <form id="loginForm" action="../php/logging.php" method="POST">
             <div class="mb-3">
               <label for="loginEmail" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+              <input type="text" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="loginPassword" class="form-label">Contraseña</label>
@@ -105,26 +113,30 @@ session_start();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../php/register.php" method="POST">
+          <form id="registerForm" action="../php/register.php" method="POST">
             <div class="mb-3">
               <label for="registerName" class="form-label">Nombre</label>
-              <input type="text" name="nombre" class="form-control" id="registerName">
-            </div>
-            <div class="mb-3">
-              <label for="registerLastname" class="form-label">Apellido</label>
-              <input type="text" name="apellido" class="form-control" id="registerLastname">
+              <input type="text" name="nombre" class="form-control" id="registerName" required>
             </div>
             <div class="mb-3">
               <label for="registerEmail" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="registerEmail">
+              <input type="email" name="email" class="form-control" id="registerEmail" required>
             </div>
             <div class="mb-3">
               <label for="registerDNI" class="form-label">DNI</label>
-              <input type="number" name="DNI"  class="form-control" id="registerDNI">
+              <input type="number" name="dni"  class="form-control" id="registerDNI" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerPatente" class="form-label">Patente</label>
+              <input type="text" name="patente" class="form-control" id="registerPatente" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerModelo" class="form-label">Modelo</label>
+              <input type="text" name="modelo" class="form-control" id="registerModelo" required>
             </div>
             <div class="mb-3">
               <label for="registerPassword" class="form-label">Contraseña</label>
-              <input type="password" name="contrasenia" class="form-control" id="registerPassword">
+              <input type="password" name="contrasenia" class="form-control" id="registerPassword" required>
             </div>
             <button type="submit" class="btn btn-success">Registrarse</button>
           </form>
@@ -132,8 +144,28 @@ session_start();
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="successMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.reload()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+<<<<<<< HEAD:UTILS/header-pages.php
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       console.log('Form submitted');
@@ -161,11 +193,72 @@ session_start();
           // Mostrar el modal de error
           document.getElementById('errorMessage').textContent = data.message;
           const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+=======
+    // Crear instancia global de errorModal
+    const errorModalEl = document.getElementById('errorModal');
+    const errorModal = new bootstrap.Modal(errorModalEl);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+
+      const loginModalEl = document.getElementById('loginModal');
+      const loginModal = new bootstrap.Modal(loginModalEl);
+
+      // Si viene de login fallido
+      if (params.get('login') === '1') {
+        // Limpiar campos
+        const email = document.getElementById('loginEmail');
+        const pass = document.getElementById('loginPassword');
+        if (email) email.value = '';
+        if (pass) pass.value = '';
+
+        // Mostrar el modal de error si corresponde
+        if (params.get('error') === '1') {
+          loginModal.hide(); // Cierra el modal de login antes de abrir el error
+          document.getElementById('errorMessage').textContent = "Email o contraseña incorrectos.";
+          errorModal.show();
+        }
+
+        // Enfocar campo email
+        const emailInput = loginModalEl.querySelector('input[type="text"], input[type="email"]');
+        if (emailInput) emailInput.focus();
+
+        // Limpiar la URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
+
+    // Evento del formulario de registro
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch('../php/register.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Cerrar el modal de registro
+          const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+          registerModal.hide();
+
+          // Mostrar el modal de éxito
+          document.getElementById('successMessage').textContent = data.message;
+          const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+          successModal.show();
+        } else {
+          // Mostrar el error en el modal de error
+          document.getElementById('errorMessage').textContent = data.message;
+>>>>>>> main:motor-admin/UTILS/header-pages.php
           errorModal.show();
         }
       })
       .catch(error => {
         console.error('Error:', error);
+<<<<<<< HEAD:UTILS/header-pages.php
         // Cerrar el modal de login
         const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
         loginModal.hide();
@@ -173,6 +266,9 @@ session_start();
         // Mostrar el error en el modal
         document.getElementById('errorMessage').textContent = 'Error al procesar la solicitud';
         const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+=======
+        document.getElementById('errorMessage').textContent = 'Error al procesar el registro';
+>>>>>>> main:motor-admin/UTILS/header-pages.php
         errorModal.show();
       });
     });

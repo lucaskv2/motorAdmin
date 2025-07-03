@@ -14,22 +14,45 @@
         <h2 class="mb-4 text-center">Contáctanos</h2>
         <form class="row g-3" action="../php/procesar_formulario_de_contacto.php" method="POST">
             <div class="col-md-6">
-                <input name="Nombre" type="text" class="form-control" placeholder="Nombre" required>
+                <input
+                    name="nombre"
+                    type="text"
+                    class="form-control text-dark bg-white border-secondary" placeholder="Nombre"
+                    required
+                >
             </div>
             <div class="col-md-6">
-                <input name="Email" type="email" class="form-control" placeholder="Email" required>
+                <input
+                    name="email"
+                    type="email"
+                    class="form-control text-dark bg-white border-secondary" placeholder="Email"
+                    required
+                >
             </div>
             <div class="col-md-6">
-                <input name="Telefono" type="tel" class="form-control" placeholder="Teléfono">
+                <input
+                    name="telefono"
+                    type="tel"
+                    class="form-control text-dark bg-white border-secondary" placeholder="Teléfono"
+                >
             </div>
             <div class="col-md-6">
-                <input name="Asunto" type="text" class="form-control" placeholder="Asunto">
+                <input
+                    name="Asunto"
+                    type="text"
+                    class="form-control text-dark bg-white border-secondary" placeholder="Asunto"
+                >
             </div>
             <div class="col-12">
-                <textarea name="Mensaje" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <textarea
+                    name="Mensaje"
+                    class="form-control text-dark bg-white border-secondary" rows="5"
+                    placeholder="Escribe tu mensaje aquí..."
+                    required
+                ></textarea>
             </div>
             <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary px-5">Enviar</button>
+                <button type="submit" class="btn btn-primary btn-lg shadow-sm px-5">Enviar</button>
             </div>
         </form>
     </section>

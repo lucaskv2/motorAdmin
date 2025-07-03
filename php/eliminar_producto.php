@@ -33,4 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
 }
 
 header("Location: control-stock.php"); // o el nombre de tu archivo principal
+<<<<<<< HEAD:php/eliminar_producto.php
 exit();
+=======
+exit();
+>>>>>>> main:motor-admin/php/eliminar_producto.php

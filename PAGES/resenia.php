@@ -1,3 +1,13 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+// Verificar si la sesión está activa
+if (!isset($_SESSION['rol'])) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +18,7 @@
 </head>
 <body>
   <?php
-    include("../UTILS/header-pages.php");
+    include("../UTILS/header-cliente-pages.php");
   ?>
   <section class="container my-5 d-grid gap-3">
     <h2 class="text-center mb-5">Reseñas y Testimonios</h2>
